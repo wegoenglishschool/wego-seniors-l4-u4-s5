@@ -803,6 +803,9 @@ function goToSlide(n){
   if(nextEl) nextEl.classList.add('active');
   document.querySelectorAll('.nav-pill')[cur].classList.add('active');
   document.getElementById('navCounter').textContent = (cur+1)+' / '+SLIDE_IDS.length;
+  // Side effects
+  if(SLIDE_IDS[n]==='slide-25') setTimeout(buildPLCards, 50);
+  if(SLIDE_IDS[n]==='slide-26') setTimeout(launchConfetti, 100);
 }
 goToSlide(0);
 function nextSlide(){if(cur<SLIDE_IDS.length-1)goToSlide(cur+1);}
@@ -1044,13 +1047,6 @@ function showPLQ(n){
 function nextPLQ(){ if(plCur<9) showPLQ(plCur+1); }
 function prevPLQ(){ if(plCur>0) showPLQ(plCur-1); }
 
-// Build PL cards when slide 25 becomes active
-const origGoToSlide = goToSlide;
-window.goToSlide = function(n){
-  origGoToSlide(n);
-  if(SLIDE_IDS[n]==='slide-25') setTimeout(buildPLCards, 50);
-};
-
 // ── EXIT TICKET CONFETTI ───────────────────────────────────
 function launchConfetti(){
   const wrap = document.getElementById('et-confetti');
@@ -1068,12 +1064,6 @@ const style = document.createElement('style');
 style.textContent = '@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
 document.head.appendChild(style);
 
-// Launch confetti when exit ticket is shown
-const _orig = window.goToSlide;
-window.goToSlide = function(n){
-  _orig(n);
-  if(SLIDE_IDS[n]==='slide-26') setTimeout(launchConfetti, 100);
-};
 </script>
 </body>
 </html>
