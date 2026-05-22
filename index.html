@@ -2,471 +2,656 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>WE GO Seniors — L4 U4 S5 — On Vacation!</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WE GO &middot; Seniors &middot; L4 U4 &middot; Session 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --deep:#0d0d2b;
-  --navy:#12122a;
-  --blue:#0057FF;
+  --deep:#05046A;
+  --navy:#05046A;
+  --mid:#0d0db8;
+  --bright:#0057FF;
+  --light:#7B2FBE;
+  --lavender:#e8d5f5;
   --yellow:#F1C405;
+  --pink:#E91E8C;
+  --teal:#00BCD4;
   --orange:#FF6B35;
   --green:#00C853;
-  --red:#FF3B3B;
-  --teal:#00BCD4;
-  --purple:#7B2FBE;
+  --red:#E53935;
   --white:#ffffff;
+  --purple:#7B2FBE;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:'Inter',sans-serif;color:white;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:'Barlow',sans-serif;}
 
-/* NAVBAR */
-.navbar{position:fixed;top:0;left:0;right:0;height:42px;background:rgba(13,13,43,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:4px;padding:0 12px;z-index:1000;}
-.nb-btn{background:none;border:none;color:rgba(255,255,255,0.55);font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:6px 10px;border-radius:8px;cursor:pointer;letter-spacing:0.3px;transition:all 0.2s;white-space:nowrap;}
-.nb-btn:hover{background:rgba(255,255,255,0.08);color:white;}
-.nb-btn.active{background:var(--yellow);color:var(--deep);}
-.nb-sep{width:1px;height:20px;background:rgba(255,255,255,0.12);margin:0 4px;}
-.nb-counter{margin-left:auto;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);}
-
-/* SLIDES */
-.slide{position:fixed;inset:42px 0 0 0;display:none;flex-direction:column;background:var(--deep);}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,4,106,0.97);backdrop-filter:blur(8px);display:flex;align-items:center;gap:6px;padding:8px 12px;border-bottom:2px solid rgba(241,196,5,0.3);}
+.nav-arrow{background:rgba(255,255,255,0.1);border:none;color:white;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;}
+.nav-arrow:hover{background:rgba(255,255,255,0.25);}
+.nav-pills{display:flex;gap:5px;flex-wrap:nowrap;overflow-x:auto;flex:1;}
+.nav-pill{background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Barlow',sans-serif;}
+.nav-pill:hover{background:rgba(255,255,255,0.18);color:white;}
+.nav-pill.active{background:var(--yellow);color:var(--deep);border-color:var(--yellow);}
+.nav-counter{font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);white-space:nowrap;flex-shrink:0;}
+.slides-wrap{width:100%;height:100%;}
+.slide{display:none;width:100%;height:100%;flex-direction:column;overflow:hidden;}
 .slide.active{display:flex;}
-
-/* SECTION HEADER */
-.section-header{flex-shrink:0;height:52px;display:flex;align-items:center;gap:14px;padding:0 20px;border-bottom:1px solid rgba(255,255,255,0.07);}
-.sh-badge{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;flex-shrink:0;}
-.sh-title{font-size:20px;font-weight:900;color:white;flex:1;}
-.sh-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
-.sh-book{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);}
-.lp-btn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);font-size:11px;padding:5px 12px;border-radius:8px;cursor:pointer;transition:all 0.2s;}
-.lp-btn:hover{background:rgba(255,255,255,0.13);color:white;}
-
-/* SLIDE CONTENT */
-.slide-content{flex:1;min-height:0;display:flex;flex-direction:column;padding:14px 20px;gap:12px;overflow:hidden;}
-
-/* NAV ARROWS */
-.nav-arrows{position:fixed;bottom:16px;right:16px;display:flex;gap:8px;z-index:500;}
-.nav-arrow{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.nav-arrow:hover{background:var(--yellow);color:var(--deep);border-color:var(--yellow);}
-
-/* ===================== WARM-UP ===================== */
-.wu-layout{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;min-height:0;}
-.wu-frames{display:flex;flex-direction:column;gap:14px;width:100%;max-width:780px;}
-.wu-frame{background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.12);border-radius:16px;padding:20px 28px;text-align:center;}
-.wu-frame-text{font-size:32px;font-weight:800;color:white;line-height:1.3;}
-.wu-frame-text span{color:var(--yellow);}
-.wu-votes{display:flex;gap:14px;justify-content:center;}
-.wu-vote-btn{background:rgba(255,255,255,0.07);border:2px solid rgba(255,255,255,0.2);border-radius:14px;color:white;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;padding:14px 28px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;}
-.wu-vote-btn:hover{border-color:var(--yellow);background:rgba(241,196,5,0.1);}
-.wu-vote-btn.voted{border-color:var(--green);background:rgba(0,200,83,0.15);color:var(--green);}
-.wu-timer{font-family:'Space Mono',monospace;font-size:48px;font-weight:700;color:var(--yellow);min-width:80px;text-align:center;}
-.wu-timer.urgent{color:var(--red);animation:pulse 0.5s infinite alternate;}
-@keyframes pulse{from{opacity:1;}to{opacity:0.5;}}
-.wu-timer-row{display:flex;align-items:center;gap:16px;justify-content:center;}
-.wu-timer-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:13px;padding:8px 18px;border-radius:10px;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;transition:all 0.2s;}
-.wu-timer-btn:hover{background:rgba(255,255,255,0.18);}
-
-/* ===================== VOCAB PRACTICE: TRIP RATING ===================== */
-.tr-layout{flex:1;display:flex;gap:16px;min-height:0;}
-.tr-main{flex:1;display:flex;flex-direction:column;gap:12px;min-height:0;}
-.tr-instructions{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 20px;}
-.tr-inst-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:8px;}
-.tr-inst-steps{display:flex;gap:20px;flex-wrap:wrap;}
-.tr-inst-step{font-size:16px;color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:8px;}
-.tr-inst-step strong{color:white;}
-.tr-example{font-size:14px;color:rgba(255,255,255,0.6);font-style:italic;margin-top:6px;}
-.tr-image-wrap{flex:1;position:relative;border-radius:16px;overflow:hidden;min-height:0;}
-.tr-image-wrap img{width:100%;height:100%;object-fit:cover;}
-.tr-image-placeholder{width:100%;height:100%;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.15);border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
-.tr-image-placeholder span{font-size:14px;color:rgba(255,255,255,0.35);font-family:'Space Mono',monospace;}
-.tr-card-num{position:absolute;top:12px;left:12px;background:var(--yellow);color:var(--deep);font-family:'Space Mono',monospace;font-size:12px;font-weight:900;padding:4px 10px;border-radius:8px;}
-.tr-stars-bar{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 0;}
-.tr-star{font-size:36px;cursor:pointer;transition:transform 0.15s;filter:grayscale(1) opacity(0.4);}
-.tr-star.active{filter:none;transform:scale(1.1);}
-.tr-star:hover{transform:scale(1.2);}
-
-/* WORD BANK PANEL */
-.wb-panel{width:200px;flex-shrink:0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;}
-.wb-section-title{font-family:'Space Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:4px;}
-.wb-word{font-size:13px;color:rgba(255,255,255,0.8);padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.06);line-height:1.3;}
-.wb-word:last-child{border-bottom:none;}
-
-/* ===================== GRAMMAR PRACTICE: VERB TIME MACHINE ===================== */
-.vtm-layout{flex:1;display:flex;gap:0;min-height:0;border-radius:16px;overflow:hidden;}
-.vtm-left{width:40%;background:rgba(255,255,255,0.04);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;}
-.vtm-verb{font-size:72px;font-weight:900;color:white;text-align:center;line-height:1;}
-.vtm-label{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-top:-8px;}
-.vtm-blank{font-size:22px;font-weight:700;color:rgba(255,255,255,0.6);text-align:center;border-bottom:3px solid rgba(255,255,255,0.3);padding-bottom:6px;min-width:220px;}
-.vtm-blank span{color:var(--yellow);}
-.vtm-reveal-btn{background:var(--green);border:none;color:white;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;padding:12px 28px;border-radius:12px;cursor:pointer;transition:all 0.2s;letter-spacing:0.5px;}
-.vtm-reveal-btn:hover{opacity:0.85;}
-.vtm-answer{font-size:36px;font-weight:900;color:var(--green);display:none;text-align:center;}
-.vtm-answer.show{display:block;}
-.vtm-right{flex:1;position:relative;background:#111;}
-.vtm-right img{width:100%;height:100%;object-fit:cover;}
-.vtm-right-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:rgba(255,255,255,0.03);}
-.vtm-right-placeholder span{font-size:13px;color:rgba(255,255,255,0.3);font-family:'Space Mono',monospace;}
-.vtm-make-label{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:8px 20px;font-size:15px;font-style:italic;color:rgba(255,255,255,0.8);white-space:nowrap;}
-.vtm-inst-layout{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;max-width:700px;margin:0 auto;}
-.vtm-inst-title{font-size:42px;font-weight:900;text-align:center;}
-.vtm-inst-steps{display:flex;flex-direction:column;gap:14px;width:100%;}
-.vtm-inst-step{background:rgba(255,255,255,0.06);border-left:4px solid var(--yellow);border-radius:0 12px 12px 0;padding:14px 20px;font-size:18px;color:rgba(255,255,255,0.9);}
-.vtm-inst-step strong{color:var(--yellow);}
-.vtm-inst-example{background:rgba(0,200,83,0.08);border:1px solid rgba(0,200,83,0.3);border-radius:12px;padding:14px 20px;font-size:17px;font-style:italic;color:rgba(255,255,255,0.8);text-align:center;}
-.vtm-inst-example strong{color:var(--green);font-style:normal;}
-
-/* ===================== SPEAKING: CHAOS VACATION WITNESS ===================== */
-.cvw-layout{flex:1;display:flex;gap:16px;min-height:0;}
-.cvw-main{flex:1;position:relative;min-height:0;}
-.cvw-main img{width:100%;height:100%;object-fit:contain;border-radius:14px;}
-.cvw-main-placeholder{width:100%;height:100%;background:rgba(255,255,255,0.04);border:2px dashed rgba(255,255,255,0.15);border-radius:14px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;}
-.cvw-main-placeholder span{font-size:13px;color:rgba(255,255,255,0.3);font-family:'Space Mono',monospace;}
-.cvw-bottom-bar{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);padding:12px 20px;border-radius:0 0 14px 14px;text-align:center;font-size:18px;font-style:italic;color:rgba(255,255,255,0.85);}
-.cvw-panel{width:200px;flex-shrink:0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;}
-.cvw-panel-title{font-family:'Space Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:4px;}
-.cvw-adj{font-size:14px;color:rgba(255,255,255,0.8);padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
-.cvw-adj:last-child{border-bottom:none;}
-.cvw-inst-layout{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;max-width:700px;margin:0 auto;}
-.cvw-inst-step{background:rgba(255,255,255,0.06);border-left:4px solid var(--orange);border-radius:0 12px 12px 0;padding:14px 20px;font-size:18px;color:rgba(255,255,255,0.9);width:100%;}
-.cvw-inst-step strong{color:var(--orange);}
-
-/* ===================== LISTENING ===================== */
-.ls-layout{flex:1;display:flex;gap:16px;min-height:0;}
-.ls-slangs{flex:1;display:flex;flex-direction:column;gap:12px;min-height:0;}
-.ls-slangs-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:0;}
-.ls-slang-card{background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
-.ls-slang-num{width:28px;height:28px;border-radius:50%;background:var(--teal);color:var(--deep);font-family:'Space Mono',monospace;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.ls-slang-text{font-size:18px;font-weight:700;color:white;}
-.ls-audio-btn{flex-shrink:0;background:var(--orange);border:none;color:white;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;padding:12px 24px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.2s;}
-.ls-audio-btn:hover{opacity:0.85;}
-.ls-audio-btn.playing{background:var(--red);}
-.ls-inst{font-size:16px;color:rgba(255,255,255,0.75);font-style:italic;text-align:center;}
-
-
-/* POST-LISTENING v2 */
-.plv2-card{background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.12);border-radius:18px;padding:22px 28px;display:none;flex-direction:column;gap:14px;}
-.plv2-card.active{display:flex;}
-.plv2-q-num{font-family:'Space Mono',monospace;font-size:11px;color:rgba(0,188,212,0.8);font-weight:700;letter-spacing:1px;}
-.plv2-q-text{font-size:20px;font-weight:700;color:white;line-height:1.4;}
-.plv2-reveal-row{display:flex;gap:12px;flex-wrap:wrap;}
-.plv2-btn{padding:10px 22px;border-radius:10px;border:none;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
-.plv2-btn-answer{background:var(--green);color:#0d0d2b;}
-.plv2-btn-slang{background:var(--purple);color:white;}
-.plv2-btn:disabled{opacity:0.35;cursor:default;}
-.plv2-answer{display:none;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.3);border-radius:10px;padding:12px 18px;color:#00C853;font-size:16px;font-weight:600;}
-.plv2-answer.visible{display:block;}
-.plv2-slang{display:none;background:rgba(123,47,190,0.15);border:1px solid rgba(123,47,190,0.4);border-radius:10px;padding:12px 18px;color:#b97ff8;font-size:18px;font-weight:900;font-style:italic;}
-.plv2-slang.visible{display:block;}
-
-/* POST-LISTENING */
-.pl-layout{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0;}
-.pl-questions{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;justify-content:center;}
-.pl-q{background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 20px;cursor:pointer;transition:all 0.2s;}
-.pl-q:hover{border-color:var(--teal);background:rgba(0,188,212,0.08);}
-.pl-q.revealed{border-color:var(--green);background:rgba(0,200,83,0.08);}
-.pl-q-text{font-size:17px;color:rgba(255,255,255,0.9);}
-.pl-q-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--teal);font-weight:700;margin-bottom:4px;}
-.pl-answer{font-size:15px;color:var(--green);font-weight:700;margin-top:8px;display:none;padding-top:8px;border-top:1px solid rgba(0,200,83,0.3);}
-.pl-q.revealed .pl-answer{display:block;}
-.pl-hint{font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;text-align:center;}
-
-/* ===================== EXIT TICKET ===================== */
-.et-layout{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;min-height:0;max-width:860px;margin:0 auto;width:100%;}
-.et-frame{background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.15);border-radius:20px;padding:28px 36px;text-align:center;width:100%;}
-.et-frame-text{font-size:26px;font-weight:700;color:white;line-height:1.6;}
-.et-frame-text span{color:var(--yellow);font-style:italic;}
-.et-or{font-size:16px;color:rgba(255,255,255,0.5);font-style:italic;}
-.et-checklist{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
-.et-check{background:rgba(0,200,83,0.1);border:1px solid rgba(0,200,83,0.3);border-radius:10px;padding:10px 18px;font-size:15px;font-weight:700;color:var(--green);display:flex;align-items:center;gap:8px;}
-.et-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-.et-confetti span{position:absolute;width:8px;height:8px;border-radius:2px;animation:confettiFall linear infinite;}
-@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+#slide-0{padding:0;}
 
 /* COVER */
-.cover-slide{background:linear-gradient(135deg,#0d0d2b 0%,#1a1a4e 50%,#0d2b4e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;position:relative;overflow:hidden;}
-.cover-bg{position:absolute;inset:0;background:url('images/cover.jpg') center/cover no-repeat;opacity:0.18;}
-.cover-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
-.cover-unit{font-family:'Space Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:3px;text-transform:uppercase;font-weight:700;}
-.cover-title{font-size:58px;font-weight:900;color:white;line-height:1.1;}
+.cover-hero{flex:1;min-height:0;background-image:url('images/cover.jpg');background-size:cover;background-position:center top;position:relative;}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.0) 40%,rgba(5,4,106,0.75) 100%);}
+.cover-overlay-text{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;padding:20px;}
+.cover-tag{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.8);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;display:block;}
+.cover-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:white;line-height:1.05;text-shadow:0 2px 20px rgba(0,0,0,0.5);margin-bottom:2px;}
 .cover-title span{color:var(--yellow);}
-.cover-subtitle{font-size:20px;color:rgba(255,255,255,0.6);font-weight:600;}
-.cover-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;}
-.cover-btn{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:white;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;padding:12px 20px;border-radius:14px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:110px;}
-.cover-btn:hover{border-color:var(--yellow);background:rgba(241,196,5,0.1);}
-.cover-btn-name{font-size:12px;font-weight:900;}
-.cover-btn-sub{font-size:10px;color:rgba(255,255,255,0.5);font-weight:400;}
+.cover-subtitle{font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:4px;}
+.cover-unit{font-family:'Space Mono',monospace;font-size:13px;color:var(--light);letter-spacing:1px;}
 
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal-box{background:#1a1a2e;border:2px solid var(--yellow);border-radius:20px;padding:32px 36px;max-width:600px;width:90%;position:relative;}
-.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:22px;cursor:pointer;}
-.modal-close:hover{color:white;}
+/* LESSON PLAN MODAL */
+.lp-btn{background:rgba(241,196,5,0.15);border:1.5px solid rgba(241,196,5,0.5);color:var(--yellow);font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;letter-spacing:0.5px;transition:background 0.2s;}
+.lp-btn:hover{background:rgba(241,196,5,0.3);}
+.lp-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,0,30,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;}
+.lp-overlay.open{display:flex;}
+.lp-modal{background:linear-gradient(135deg,#020255 0%,#05046A 100%);border:2px solid rgba(241,196,5,0.3);border-radius:20px;width:min(680px,92vw);max-height:82vh;overflow-y:auto;padding:28px 30px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.6);}
+.lp-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.1);border:none;color:white;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.lp-close:hover{background:rgba(255,255,255,0.25);}
+.lp-header{margin-bottom:18px;}
+.lp-activity-badge{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px;}
+.lp-activity-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:white;margin-bottom:4px;}
+.lp-meta{font-size:12px;color:rgba(255,255,255,0.5);font-family:'Space Mono',monospace;}
+.lp-section{margin-bottom:16px;}
+.lp-section-title{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--yellow);margin-bottom:6px;border-bottom:1px solid rgba(241,196,5,0.2);padding-bottom:4px;}
+.lp-section-body{font-size:14px;color:rgba(255,255,255,0.85);line-height:1.65;}
+.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.lp-box{background:rgba(255,255,255,0.06);border-radius:12px;padding:14px 16px;}
+.lp-box-title{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+.lp-box-body{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.6;}
+.lp-do .lp-box-title{color:#00c853;}
+.lp-dont .lp-box-title{color:#ff5252;}
+.cover-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px;background:rgba(5,4,106,0.97);}
+.cover-btn{border:none;border-radius:14px;padding:14px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform 0.15s,opacity 0.15s;}
+.cover-btn:hover{transform:scale(1.04);opacity:0.9;}
+.cover-btn-name{font-size:13px;font-weight:900;color:white;text-align:center;line-height:1.2;}
+.cover-btn-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,0.8);text-align:center;line-height:1.2;}
+
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;gap:10px;padding:10px 16px;flex-shrink:0;border-bottom:2px solid rgba(255,255,255,0.08);}
+.sh-badge{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+.sh-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;flex:1;}
+.sh-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.sh-book{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);white-space:nowrap;}
+.slide-content{flex:1;min-height:0;display:flex;flex-direction:column;padding:14px 16px;gap:12px;overflow:hidden;}
+
+/* WARM-UP: TWO TRUTHS AND A LIE */
+.wu-layout{flex:1;display:flex;gap:14px;min-height:0;}
+.wu-main{flex:1;display:flex;flex-direction:column;gap:12px;min-height:0;justify-content:center;}
+.wu-inst{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;text-align:center;}
+.wu-frames{display:flex;flex-direction:column;gap:10px;}
+.wu-frame{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.15);border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:14px;}
+.wu-frame-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--deep);flex-shrink:0;}
+.wu-frame-text{font-size:18px;font-weight:700;color:white;flex:1;line-height:1.3;}
+.wu-frame-text span{color:var(--yellow);font-style:italic;}
+.wu-vote-row{display:flex;gap:8px;justify-content:center;flex-shrink:0;}
+.wu-vote-btn{padding:12px 24px;border-radius:12px;border:none;font-size:14px;font-weight:900;cursor:pointer;transition:all 0.2s;font-family:'Barlow',sans-serif;}
+.wu-vote-btn:hover{transform:scale(1.05);}
+.wu-vote-btn.selected{transform:scale(1.08);}
+.wu-side{width:220px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+.wu-timer-box{background:rgba(255,255,255,0.07);border-radius:14px;padding:16px;text-align:center;}
+.wu-timer-label{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
+.wu-timer-display{font-family:'Space Mono',monospace;font-size:48px;font-weight:700;color:var(--yellow);line-height:1;}
+.wu-timer-btn{margin-top:10px;background:var(--yellow);border:none;color:var(--deep);font-family:'Space Mono',monospace;font-size:12px;font-weight:900;padding:8px 16px;border-radius:10px;cursor:pointer;width:100%;}
+.wu-example-box{background:rgba(255,255,255,0.07);border-radius:14px;padding:14px;flex:1;}
+.wu-example-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;font-weight:900;margin-bottom:8px;}
+.wu-example-text{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;font-style:italic;}
+
+/* VOCAB PRACTICE: TRIP RATING */
+.tr-layout{flex:1;display:flex;gap:14px;min-height:0;}
+.tr-main{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.tr-img-wrap{flex:1;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,0.15);min-height:0;position:relative;background:#020240;}
+.tr-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.tr-card-num{position:absolute;top:10px;left:10px;background:rgba(241,196,5,0.9);color:var(--deep);font-family:'Space Mono',monospace;font-size:11px;font-weight:900;padding:4px 10px;border-radius:20px;letter-spacing:1px;}
+.tr-stars{display:flex;gap:6px;justify-content:center;flex-shrink:0;padding:4px 0;}
+.tr-star{font-size:32px;cursor:pointer;transition:transform 0.15s;opacity:0.3;}
+.tr-star.active{opacity:1;}
+.tr-star:hover{transform:scale(1.2);}
+.tr-nav-row{display:flex;gap:8px;flex-shrink:0;}
+.tr-nav-btn{flex:1;background:var(--yellow);border:none;color:var(--deep);font-family:'Space Mono',monospace;font-size:12px;font-weight:900;padding:10px;border-radius:12px;cursor:pointer;transition:opacity 0.2s;}
+.tr-nav-btn:hover{opacity:0.85;}
+.tr-nav-btn.secondary{background:rgba(255,255,255,0.1);color:white;}
+.tr-side{width:240px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+.tr-wordbank{flex:1;background:rgba(255,255,255,0.06);border-radius:14px;padding:14px;overflow-y:auto;min-height:0;}
+.tr-wb-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:1.5px;text-transform:uppercase;font-weight:900;margin-bottom:8px;}
+.tr-wb-group{margin-bottom:10px;}
+.tr-wb-group-label{font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.tr-wb-chip{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;margin:2px 2px;}
+.tr-inst-layout{flex:1;display:flex;gap:14px;min-height:0;align-items:center;}
+.tr-inst-main{flex:1;display:flex;flex-direction:column;gap:14px;}
+.tr-inst-step{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.tr-inst-step-num{width:32px;height:32px;border-radius:50%;background:var(--yellow);color:var(--deep);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
+.tr-inst-step-text{font-size:15px;font-weight:700;color:white;line-height:1.4;}
+.tr-inst-example{background:rgba(0,188,212,0.1);border:1.5px solid rgba(0,188,212,0.3);border-radius:14px;padding:14px 18px;}
+.tr-inst-example-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;font-weight:900;margin-bottom:6px;}
+.tr-inst-example-text{font-size:15px;font-weight:700;color:white;font-style:italic;}
+
+/* GRAMMAR PRACTICE: VERB TIME MACHINE */
+.vtm-layout{flex:1;display:flex;gap:14px;min-height:0;}
+.vtm-left{width:42%;display:flex;flex-direction:column;gap:12px;min-height:0;justify-content:center;}
+.vtm-verb-base{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:white;line-height:1;text-align:center;}
+.vtm-blank-row{display:flex;align-items:center;gap:10px;justify-content:center;}
+.vtm-blank-label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;}
+.vtm-blank{font-size:24px;font-weight:900;color:rgba(255,255,255,0.3);border-bottom:3px solid rgba(255,255,255,0.3);min-width:120px;text-align:center;padding:4px 8px;transition:all 0.3s;}
+.vtm-blank.revealed{color:var(--green);border-color:var(--green);}
+.vtm-reveal-btn{background:var(--yellow);border:none;color:var(--deep);font-family:'Space Mono',monospace;font-size:12px;font-weight:900;padding:10px 20px;border-radius:12px;cursor:pointer;transition:opacity 0.2s;align-self:center;}
+.vtm-reveal-btn:hover{opacity:0.85;}
+.vtm-reveal-btn:disabled{opacity:0.35;cursor:default;}
+.vtm-right{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.vtm-img-wrap{flex:1;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,0.15);min-height:0;position:relative;background:#020240;}
+.vtm-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.vtm-make-label{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(5,4,106,0.85);border:1.5px solid rgba(241,196,5,0.5);color:var(--yellow);font-family:'Space Mono',monospace;font-size:11px;font-weight:900;padding:6px 16px;border-radius:20px;letter-spacing:1px;white-space:nowrap;}
+.vtm-nav-row{display:flex;gap:8px;flex-shrink:0;}
+.vtm-nav-btn{flex:1;background:var(--yellow);border:none;color:var(--deep);font-family:'Space Mono',monospace;font-size:12px;font-weight:900;padding:10px;border-radius:12px;cursor:pointer;transition:opacity 0.2s;}
+.vtm-nav-btn:hover{opacity:0.85;}
+.vtm-nav-btn.secondary{background:rgba(255,255,255,0.1);color:white;}
+.vtm-counter{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);text-align:center;flex-shrink:0;}
+.vtm-inst-layout{flex:1;display:flex;gap:14px;min-height:0;align-items:center;}
+.vtm-inst-main{flex:1;display:flex;flex-direction:column;gap:14px;}
+.vtm-inst-step{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.vtm-inst-step-num{width:32px;height:32px;border-radius:50%;background:var(--pink);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
+.vtm-inst-step-text{font-size:15px;font-weight:700;color:white;line-height:1.4;}
+.vtm-inst-example{background:rgba(233,30,140,0.1);border:1.5px solid rgba(233,30,140,0.3);border-radius:14px;padding:14px 18px;}
+.vtm-inst-example-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--pink);letter-spacing:1.5px;text-transform:uppercase;font-weight:900;margin-bottom:6px;}
+.vtm-inst-example-text{font-size:15px;font-weight:700;color:white;font-style:italic;}
+
+/* SPEAKING: CHAOS VACATION WITNESS */
+.sp-layout{flex:1;display:flex;gap:14px;min-height:0;}
+.sp-collage-wrap{flex:1;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,0.15);min-height:0;position:relative;background:#020240;}
+.sp-collage-wrap img{width:100%;height:100%;object-fit:cover;}
+.sp-bottom-bar{position:absolute;bottom:0;left:0;right:0;background:rgba(5,4,106,0.9);border-top:2px solid rgba(241,196,5,0.4);padding:10px 16px;text-align:center;font-size:16px;font-weight:900;color:var(--yellow);}
+.sp-side{width:240px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+.sp-adj-box{flex:1;background:rgba(255,255,255,0.06);border-radius:14px;padding:14px;overflow-y:auto;min-height:0;}
+.sp-adj-title{font-family:'Space Mono',monospace;font-size:10px;color:var(--red);letter-spacing:1.5px;text-transform:uppercase;font-weight:900;margin-bottom:8px;}
+.sp-adj-chip{display:inline-block;background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:white;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:700;margin:3px 2px;}
+.sp-inst-layout{flex:1;display:flex;gap:14px;min-height:0;align-items:center;}
+.sp-inst-main{flex:1;display:flex;flex-direction:column;gap:14px;}
+.sp-inst-step{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.sp-inst-step-num{width:32px;height:32px;border-radius:50%;background:var(--teal);color:var(--deep);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
+.sp-inst-step-text{font-size:15px;font-weight:700;color:white;line-height:1.4;}
+
+/* LISTENING: VLOG REWIND */
+.ls-layout{flex:1;display:flex;gap:14px;min-height:0;}
+.ls-main{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.ls-inst{background:rgba(0,188,212,0.1);border:1.5px solid rgba(0,188,212,0.3);border-radius:12px;padding:10px 16px;font-size:14px;font-weight:700;color:var(--teal);flex-shrink:0;}
+.ls-slangs-grid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;min-height:0;}
+.ls-col{display:flex;flex-direction:column;gap:6px;}
+.ls-col-title{font-family:'Space Mono',monospace;font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:20px;text-align:center;flex-shrink:0;}
+.ls-slang-card{background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.12);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;}
+.ls-slang-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:900;color:var(--deep);flex-shrink:0;}
+.ls-slang-text{font-size:15px;font-weight:700;color:white;}
+.ls-audio-row{display:flex;justify-content:center;flex-shrink:0;}
+.ls-audio-btn{background:var(--teal);border:none;color:var(--deep);font-family:'Space Mono',monospace;font-size:13px;font-weight:900;padding:12px 28px;border-radius:12px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px;}
+.ls-audio-btn:hover{opacity:0.85;}
+.ls-audio-btn.playing{background:var(--red);color:white;}
+
+/* POST-LISTENING */
+.pl-layout{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;}
+.pl-nav-row{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.pl-nav-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 16px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:700;font-family:'Barlow',sans-serif;transition:background 0.2s;}
+.pl-nav-btn:hover{background:rgba(255,255,255,0.18);}
+.pl-counter{flex:1;text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.5);}
+.pl-card{background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.12);border-radius:18px;padding:22px 28px;display:none;flex-direction:column;gap:14px;flex:1;}
+.pl-card.active{display:flex;}
+.pl-q-num{font-family:'Space Mono',monospace;font-size:11px;color:rgba(0,188,212,0.8);font-weight:700;letter-spacing:1px;}
+.pl-q-text{font-size:20px;font-weight:700;color:white;line-height:1.4;}
+.pl-reveal-row{display:flex;gap:12px;flex-wrap:wrap;}
+.pl-btn{padding:10px 22px;border-radius:10px;border:none;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'Barlow',sans-serif;}
+.pl-btn-answer{background:var(--green);color:#05046A;}
+.pl-btn-slang{background:var(--purple);color:white;}
+.pl-btn:disabled{opacity:0.35;cursor:default;}
+.pl-answer{display:none;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.3);border-radius:10px;padding:12px 18px;color:#00C853;font-size:16px;font-weight:600;}
+.pl-answer.visible{display:block;}
+.pl-slang{display:none;background:rgba(123,47,190,0.15);border:1px solid rgba(123,47,190,0.4);border-radius:10px;padding:12px 18px;color:#b97ff8;font-size:18px;font-weight:900;font-style:italic;}
+.pl-slang.visible{display:block;}
+
+/* EXIT TICKET */
+.et-layout{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0;justify-content:center;align-items:center;}
+.et-confetti-wrap{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.et-frame{background:rgba(255,255,255,0.07);border:2px solid rgba(241,196,5,0.4);border-radius:20px;padding:28px 36px;max-width:700px;width:100%;}
+.et-frame-text{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:white;line-height:1.6;text-align:center;}
+.et-frame-text span{color:var(--yellow);font-style:italic;}
+.et-or{font-size:14px;color:rgba(255,255,255,0.5);text-align:center;}
+.et-checklist{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.et-check{background:rgba(0,200,83,0.15);border:1.5px solid rgba(0,200,83,0.35);color:var(--green);padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <button class="nb-btn" onclick="goToSlide(0)">COVER</button>
-  <div class="nb-sep"></div>
-  <button class="nb-btn" onclick="goToSlide(1)">WARM-UP</button>
-  <div class="nb-sep"></div>
-  <button class="nb-btn" onclick="goToSlide(2)">VOCAB PRACTICE</button>
-  <div class="nb-sep"></div>
-  <button class="nb-btn" onclick="goToSlide(13)">GRAM. PRACTICE</button>
-  <div class="nb-sep"></div>
-  <button class="nb-btn" onclick="goToSlide(24)">SPEAKING</button>
-  <div class="nb-sep"></div>
-  <button class="nb-btn" onclick="goToSlide(26)">LISTENING</button>
-  <div class="nb-sep"></div>
-  <button class="nb-btn" onclick="goToSlide(28)">EXIT TICKET</button>
-  <span class="nb-counter" id="navCounter">1/29</span>
+<nav class="nav">
+  <button class="nav-arrow" onclick="prevSlide()">&#8592;</button>
+  <div class="nav-pills" id="navPills"></div>
+  <button class="nav-arrow" onclick="nextSlide()">&#8594;</button>
+  <span class="nav-counter" id="navCounter"></span>
 </nav>
 
-<!-- NAV ARROWS -->
-<div class="nav-arrows">
-  <button class="nav-arrow" onclick="changeSlide(-1)">&#8592;</button>
-  <button class="nav-arrow" onclick="changeSlide(1)">&#8594;</button>
-</div>
+<div class="slides-wrap" id="slidesWrap" style="padding-top:50px;">
 
-<!-- ===== SLIDE 0: COVER ===== -->
-<div class="slide cover-slide" id="slide-0">
-  <div class="cover-bg"></div>
-  <div class="cover-content">
-    <div class="cover-unit">Level 4 &bull; Unit 4 &bull; Session 5</div>
-    <div class="cover-title">On <span>Vacation!</span></div>
-    <div class="cover-subtitle">Full-Week Review &mdash; Friday</div>
-    <div class="cover-btns">
-      <button class="cover-btn" style="border-color:#7B2FBE;" onclick="goToSlide(1)"><span class="cover-btn-name">Warm-up</span><span class="cover-btn-sub">Two Truths &amp; a Lie</span></button>
-      <button class="cover-btn" style="border-color:#F1C405;" onclick="goToSlide(2)"><span class="cover-btn-name">Vocab Practice</span><span class="cover-btn-sub">Trip Rating</span></button>
-      <button class="cover-btn" style="border-color:#00C853;" onclick="goToSlide(13)"><span class="cover-btn-name">Gram. Practice</span><span class="cover-btn-sub">Verb Time Machine</span></button>
-      <button class="cover-btn" style="border-color:#FF6B35;" onclick="goToSlide(24)"><span class="cover-btn-name">Speaking</span><span class="cover-btn-sub">Chaos Witness</span></button>
-      <button class="cover-btn" style="border-color:#00BCD4;" onclick="goToSlide(26)"><span class="cover-btn-name">Listening</span><span class="cover-btn-sub">Slang Spotter</span></button>
-      <button class="cover-btn" style="border-color:#FF3B3B;" onclick="goToSlide(28)"><span class="cover-btn-name">Exit Ticket</span><span class="cover-btn-sub">My Week in One Sentence</span></button>
+<!-- SLIDE 0: COVER -->
+<div class="slide" id="slide-0" style="padding-top:0;">
+  <div class="cover-hero">
+    <div class="cover-overlay"></div>
+    <div class="cover-overlay-text">
+      <span class="cover-tag">WE GO · Seniors · Level 4 · Unit 4 · Session 5</span>
+      <div class="cover-title">On <span>Vacation!</span></div>
+      <div class="cover-subtitle">Friday Review — Full-Week Wrap-Up</div>
+      <div class="cover-unit">Vocabulary · Grammar · Speaking · Listening · Slangs</div>
     </div>
+  </div>
+  <div class="cover-buttons">
+    <button class="cover-btn" style="background:rgba(123,47,190,0.5);" onclick="goToSlide(1)">
+      <span style="font-size:20px;">🎯</span>
+      <span class="cover-btn-name">Warm-up</span>
+      <span class="cover-btn-sub">Two Truths &amp; a Lie</span>
+    </button>
+    <button class="cover-btn" style="background:rgba(241,196,5,0.35);" onclick="goToSlide(2)">
+      <span style="font-size:20px;">⭐</span>
+      <span class="cover-btn-name">Vocab Practice</span>
+      <span class="cover-btn-sub">Trip Rating</span>
+    </button>
+    <button class="cover-btn" style="background:rgba(233,30,140,0.4);" onclick="goToSlide(11)">
+      <span style="font-size:20px;">⏰</span>
+      <span class="cover-btn-name">Gram. Practice</span>
+      <span class="cover-btn-sub">Verb Time Machine</span>
+    </button>
+    <button class="cover-btn" style="background:rgba(0,188,212,0.35);" onclick="goToSlide(22)">
+      <span style="font-size:20px;">🗣️</span>
+      <span class="cover-btn-name">Speaking</span>
+      <span class="cover-btn-sub">Chaos Vacation</span>
+    </button>
+    <button class="cover-btn" style="background:rgba(0,188,212,0.25);" onclick="goToSlide(24)">
+      <span style="font-size:20px;">🎧</span>
+      <span class="cover-btn-name">Listening</span>
+      <span class="cover-btn-sub">Slang Spotter</span>
+    </button>
+    <button class="cover-btn" style="background:rgba(229,57,53,0.4);" onclick="goToSlide(25)">
+      <span style="font-size:20px;">🎟️</span>
+      <span class="cover-btn-name">Exit Ticket</span>
+      <span class="cover-btn-sub">My Week in One Sentence</span>
+    </button>
   </div>
 </div>
 
-<!-- ===== SLIDE 1: WARM-UP ===== -->
+<!-- SLIDE 1: WARM-UP -->
 <div class="slide" id="slide-1">
   <div class="section-header">
     <span class="sh-badge" style="background:#7B2FBE;color:white;">WARM-UP</span>
-    <span class="sh-title">Two Truths and a Lie &mdash; Vacation Edition</span>
-    <div class="sh-right"><span class="sh-book">8 min</span></div>
+    <span class="sh-title">Two Truths and a Lie — Vacation Edition</span>
+    <div class="sh-right">
+      <button class="lp-btn" onclick="openLP('warmup')">LESSON PLAN</button>
+      <span class="sh-book">5 min</span>
+    </div>
   </div>
   <div class="slide-content">
     <div class="wu-layout">
-      <div class="wu-frames">
-        <div class="wu-frame">
-          <div class="wu-frame-text">&#8220;I <span>[verb-past]</span> in <span>[place]</span>.&#8221;</div>
+      <div class="wu-main">
+        <div class="wu-inst">&#128161; Each student shares 3 statements — 2 are TRUE, 1 is a LIE. Class votes!</div>
+        <div class="wu-frames">
+          <div class="wu-frame">
+            <div class="wu-frame-num" style="background:var(--yellow);">1</div>
+            <div class="wu-frame-text">I <span>[verb-past]</span> in <span>[place]</span>.</div>
+          </div>
+          <div class="wu-frame">
+            <div class="wu-frame-num" style="background:var(--teal);">2</div>
+            <div class="wu-frame-text">The trip was <span>[adjective]</span>.</div>
+          </div>
+          <div class="wu-frame">
+            <div class="wu-frame-num" style="background:var(--pink);">3</div>
+            <div class="wu-frame-text">I <span>[verb-past]</span> <span>[object/experience]</span>.</div>
+          </div>
         </div>
-        <div class="wu-frame">
-          <div class="wu-frame-text">&#8220;The trip was <span>[adjective]</span>.&#8221;</div>
-        </div>
-        <div class="wu-frame">
-          <div class="wu-frame-text">&#8220;I <span>[verb-past]</span> <span>[object / experience]</span>.&#8221;</div>
+        <div class="wu-vote-row">
+          <button class="wu-vote-btn" style="background:var(--yellow);color:var(--deep);" onclick="this.classList.toggle('selected')">&#10003; Statement 1 is the LIE</button>
+          <button class="wu-vote-btn" style="background:var(--teal);color:var(--deep);" onclick="this.classList.toggle('selected')">&#10003; Statement 2 is the LIE</button>
+          <button class="wu-vote-btn" style="background:var(--pink);color:white;" onclick="this.classList.toggle('selected')">&#10003; Statement 3 is the LIE</button>
         </div>
       </div>
-      <div class="wu-timer-row">
-        <div class="wu-timer" id="wu-timer-display">0:30</div>
-        <button class="wu-timer-btn" onclick="startWuTimer()">&#9654; Start</button>
-        <button class="wu-timer-btn" onclick="resetWuTimer()">&#8635; Reset</button>
-      </div>
-      <div class="wu-votes">
-        <button class="wu-vote-btn" id="wu-vote-1" onclick="toggleVote('wu-vote-1')">&#9989; Statement 1</button>
-        <button class="wu-vote-btn" id="wu-vote-2" onclick="toggleVote('wu-vote-2')">&#9989; Statement 2</button>
-        <button class="wu-vote-btn" id="wu-vote-3" onclick="toggleVote('wu-vote-3')">&#9989; Statement 3</button>
+      <div class="wu-side">
+        <div class="wu-timer-box">
+          <div class="wu-timer-label">THINK TIME</div>
+          <div class="wu-timer-display" id="wuTimer">30</div>
+          <button class="wu-timer-btn" onclick="startWuTimer()">&#9654; START</button>
+        </div>
+        <div class="wu-example-box">
+          <div class="wu-example-title">EXAMPLE</div>
+          <div class="wu-example-text">
+            1. "I visited Paris last summer."<br>
+            2. "The trip was absolutely exhausting."<br>
+            3. "I ate snails for the first time."<br><br>
+            <strong style="color:var(--yellow);">Which one is the lie?</strong>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== SLIDES 2–10: VOCAB PRACTICE — TRIP RATING ===== -->
-<!-- SLIDE 2: Instructions -->
+<!-- SLIDE 2: VOCAB PRACTICE — INSTRUCTIONS -->
 <div class="slide" id="slide-2">
   <div class="section-header">
-    <span class="sh-badge" style="background:#F1C405;color:#0d0d2b;">VOCAB PRACTICE</span>
+    <span class="sh-badge" style="background:#F1C405;color:#05046A;">VOCAB PRACTICE</span>
     <span class="sh-title">Trip Rating</span>
-    <div class="sh-right"><span class="sh-book">12 min</span></div>
+    <div class="sh-right">
+      <button class="lp-btn" onclick="openLP('vocabprac')">LESSON PLAN</button>
+      <span class="sh-book">10 min</span>
+    </div>
+  </div>
+  <div class="slide-content">
+    <div class="tr-inst-layout">
+      <div class="tr-inst-main">
+        <div class="tr-inst-step">
+          <div class="tr-inst-step-num">1</div>
+          <div class="tr-inst-step-text">Look at the travel image carefully.</div>
+        </div>
+        <div class="tr-inst-step">
+          <div class="tr-inst-step-num">2</div>
+          <div class="tr-inst-step-text">Give it a rating: ⭐ to ⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="tr-inst-step">
+          <div class="tr-inst-step-num">3</div>
+          <div class="tr-inst-step-text">Justify your rating using an <strong>adjective + intensifier</strong>.</div>
+        </div>
+        <div class="tr-inst-example">
+          <div class="tr-inst-example-label">EXAMPLE</div>
+          <div class="tr-inst-example-text">"I give it 2 stars — the hotel was <strong>absolutely terrible</strong>."</div>
+        </div>
+      </div>
+      <div class="tr-side">
+        <div class="tr-wordbank">
+          <div class="tr-wb-title">WORD BANK</div>
+          <div class="tr-wb-group">
+            <div class="tr-wb-group-label">ADJECTIVES</div>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">amazing</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">terrible</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">breathtaking</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">awful</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">stunning</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">disgusting</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">incredible</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">disappointing</span>
+            <span class="tr-wb-chip" style="background:rgba(241,196,5,0.15);border:1px solid rgba(241,196,5,0.3);color:var(--yellow);">chaotic</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">peaceful</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">overpriced</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">cozy</span>
+            <span class="tr-wb-chip" style="background:rgba(241,196,5,0.15);border:1px solid rgba(241,196,5,0.3);color:var(--yellow);">exhausting</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">romantic</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">vibrant</span>
+          </div>
+          <div class="tr-wb-group">
+            <div class="tr-wb-group-label">INTENSIFIERS</div>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">absolutely</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">completely</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">totally</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">incredibly</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">really</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">extremely</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">so</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">very</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDES 3–10: VOCAB PRACTICE — TRIP RATING CARDS -->
+<div class="slide" id="slide-3">
+  <div class="section-header">
+    <span class="sh-badge" style="background:#F1C405;color:#05046A;">VOCAB PRACTICE</span>
+    <span class="sh-title">Trip Rating</span>
+    <div class="sh-right"><span class="sh-book">Card 1 / 8</span></div>
   </div>
   <div class="slide-content">
     <div class="tr-layout">
-      <div class="tr-main" style="justify-content:center;gap:20px;">
-        <div style="text-align:center;">
-          <div style="font-size:48px;font-weight:900;color:var(--yellow);margin-bottom:8px;">Trip Rating &#9733;</div>
-          <div style="font-size:20px;color:rgba(255,255,255,0.7);">How good (or bad) was the trip?</div>
+      <div class="tr-main">
+        <div class="tr-img-wrap">
+          <img src="images/trip/trip_01.jpg" alt="Trip 1">
+          <div class="tr-card-num">CARD 1 / 8</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto;width:100%;">
-          <div class="tr-inst-step" style="background:rgba(255,255,255,0.06);border-left:4px solid var(--yellow);border-radius:0 12px 12px 0;padding:14px 20px;font-size:18px;color:rgba(255,255,255,0.9);">&#128247; <strong>Look at the image.</strong></div>
-          <div class="tr-inst-step" style="background:rgba(255,255,255,0.06);border-left:4px solid var(--yellow);border-radius:0 12px 12px 0;padding:14px 20px;font-size:18px;color:rgba(255,255,255,0.9);">&#11088; <strong>Give it a rating:</strong> &#9733; to &#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <div class="tr-inst-step" style="background:rgba(255,255,255,0.06);border-left:4px solid var(--yellow);border-radius:0 12px 12px 0;padding:14px 20px;font-size:18px;color:rgba(255,255,255,0.9);">&#128172; <strong>Justify</strong> your rating using an <em>adjective + intensifier</em>.</div>
+        <div class="tr-stars" id="stars-1">
+          <span class="tr-star" onclick="rateStar(1,1)">&#9733;</span>
+          <span class="tr-star" onclick="rateStar(1,2)">&#9733;</span>
+          <span class="tr-star" onclick="rateStar(1,3)">&#9733;</span>
+          <span class="tr-star" onclick="rateStar(1,4)">&#9733;</span>
+          <span class="tr-star" onclick="rateStar(1,5)">&#9733;</span>
         </div>
-        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 20px;text-align:center;max-width:600px;margin:0 auto;width:100%;">
-          <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Example</div>
-          <div style="font-size:17px;font-style:italic;color:rgba(255,255,255,0.8);">"I give it 2 stars &mdash; the hotel was <strong style="color:var(--yellow);">absolutely terrible</strong>."</div>
+        <div class="tr-nav-row">
+          <button class="tr-nav-btn secondary" onclick="goToSlide(2)">&#9664; Back</button>
+          <button class="tr-nav-btn" onclick="goToSlide(4)">Next &#9654;</button>
         </div>
       </div>
-      <div id="wb-panel-inst" class="wb-panel">
-        <div class="wb-section-title">Adjectives</div>
-        <div class="wb-word">amazing</div><div class="wb-word">terrible</div><div class="wb-word">breathtaking</div><div class="wb-word">awful</div><div class="wb-word">stunning</div><div class="wb-word">disgusting</div><div class="wb-word">incredible</div><div class="wb-word">disappointing</div><div class="wb-word">chaotic</div><div class="wb-word">peaceful</div><div class="wb-word">overpriced</div><div class="wb-word">cozy</div><div class="wb-word">exhausting</div><div class="wb-word">romantic</div><div class="wb-word">vibrant</div>
-        <div class="wb-section-title" style="margin-top:10px;">Intensifiers</div>
-        <div class="wb-word">absolutely</div><div class="wb-word">completely</div><div class="wb-word">totally</div><div class="wb-word">incredibly</div><div class="wb-word">really</div><div class="wb-word">quite</div><div class="wb-word">rather</div><div class="wb-word">extremely</div><div class="wb-word">so</div><div class="wb-word">very</div>
+      <div class="tr-side">
+        <div class="tr-wordbank">
+          <div class="tr-wb-title">WORD BANK</div>
+          <div class="tr-wb-group">
+            <div class="tr-wb-group-label">ADJECTIVES</div>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">amazing</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">terrible</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">breathtaking</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">awful</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">stunning</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">disgusting</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">incredible</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">disappointing</span>
+            <span class="tr-wb-chip" style="background:rgba(241,196,5,0.15);border:1px solid rgba(241,196,5,0.3);color:var(--yellow);">chaotic</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">peaceful</span>
+            <span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">overpriced</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">cozy</span>
+            <span class="tr-wb-chip" style="background:rgba(241,196,5,0.15);border:1px solid rgba(241,196,5,0.3);color:var(--yellow);">exhausting</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">romantic</span>
+            <span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">vibrant</span>
+          </div>
+          <div class="tr-wb-group">
+            <div class="tr-wb-group-label">INTENSIFIERS</div>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">absolutely</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">completely</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">totally</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">incredibly</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">really</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">extremely</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">so</span>
+            <span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">very</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SLIDES 3–10: Trip Rating Image Cards (generated by JS) -->
+<!-- Trip cards 4-10 generated by JS -->
 
-<!-- ===== SLIDES 13–23: GRAMMAR PRACTICE — VERB TIME MACHINE ===== -->
-<!-- SLIDE 13: Instructions -->
-<div class="slide" id="slide-13">
+<!-- SLIDE 11: GRAMMAR PRACTICE — INSTRUCTIONS -->
+<div class="slide" id="slide-11">
   <div class="section-header">
-    <span class="sh-badge" style="background:#00C853;color:#0d0d2b;">GRAM. PRACTICE</span>
+    <span class="sh-badge" style="background:#E91E8C;color:white;">GRAM. PRACTICE</span>
     <span class="sh-title">Verb Time Machine</span>
-    <div class="sh-right"><span class="sh-book">15 min</span></div>
+    <div class="sh-right">
+      <button class="lp-btn" onclick="openLP('grammarprac')">LESSON PLAN</button>
+      <span class="sh-book">12 min</span>
+    </div>
   </div>
   <div class="slide-content">
     <div class="vtm-inst-layout">
-      <div style="font-size:52px;">&#9200;</div>
-      <div class="vtm-inst-title">Verb Time Machine</div>
-      <div class="vtm-inst-steps">
-        <div class="vtm-inst-step"><strong>Step 1:</strong> Say the Simple Past form of the verb.</div>
-        <div class="vtm-inst-step"><strong>Step 2:</strong> Make a sentence in Simple Past inspired by the photo.</div>
-      </div>
-      <div class="vtm-inst-example">
-        <strong>go</strong> &rarr; <strong>went</strong> &rarr; <em>"I went to Tokyo last year and it was amazing."</em>
+      <div class="vtm-inst-main">
+        <div class="vtm-inst-step">
+          <div class="vtm-inst-step-num">1</div>
+          <div class="vtm-inst-step-text">Say the <strong>Simple Past</strong> form of the verb shown.</div>
+        </div>
+        <div class="vtm-inst-step">
+          <div class="vtm-inst-step-num">2</div>
+          <div class="vtm-inst-step-text">Make a <strong>complete sentence</strong> in Simple Past inspired by the photo.</div>
+        </div>
+        <div class="vtm-inst-example">
+          <div class="vtm-inst-example-label">EXAMPLE</div>
+          <div class="vtm-inst-example-text">go &rarr; <strong>went</strong> &rarr; "I went to Tokyo last year and it was amazing."</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SLIDES 14–23: Verb rounds (generated by JS) -->
+<!-- SLIDES 12–21: GRAMMAR PRACTICE — VERB ROUNDS (generated by JS) -->
 
-<!-- ===== SLIDES 24–25: SPEAKING — CHAOS VACATION WITNESS ===== -->
-<!-- SLIDE 24: Instructions -->
+<!-- SLIDE 22: SPEAKING — INSTRUCTIONS -->
+<div class="slide" id="slide-22">
+  <div class="section-header">
+    <span class="sh-badge" style="background:#00ACC1;color:var(--deep);">SPEAKING</span>
+    <span class="sh-title">Chaos Vacation Witness</span>
+    <div class="sh-right">
+      <button class="lp-btn" onclick="openLP('speaking')">LESSON PLAN</button>
+      <span class="sh-book">8 min</span>
+    </div>
+  </div>
+  <div class="slide-content">
+    <div class="sp-inst-layout">
+      <div class="sp-inst-main">
+        <div class="sp-inst-step">
+          <div class="sp-inst-step-num">1</div>
+          <div class="sp-inst-step-text">You are a <strong>witness</strong>! Pick one scene from the collage.</div>
+        </div>
+        <div class="sp-inst-step">
+          <div class="sp-inst-step-num">2</div>
+          <div class="sp-inst-step-text">Describe your scene in <strong>Simple Past</strong>. Use at least <strong>2 negative adjectives</strong>.</div>
+        </div>
+        <div class="sp-inst-step">
+          <div class="sp-inst-step-num">3</div>
+          <div class="sp-inst-step-text">The group will ask you <strong>one follow-up question</strong>.</div>
+        </div>
+      </div>
+      <div class="sp-side">
+        <div class="sp-adj-box">
+          <div class="sp-adj-title">NEGATIVE ADJECTIVES</div>
+          <span class="sp-adj-chip">terrible</span>
+          <span class="sp-adj-chip">awful</span>
+          <span class="sp-adj-chip">disgusting</span>
+          <span class="sp-adj-chip">disappointing</span>
+          <span class="sp-adj-chip">overpriced</span>
+          <span class="sp-adj-chip">chaotic</span>
+          <span class="sp-adj-chip">exhausting</span>
+          <span class="sp-adj-chip">frustrating</span>
+          <span class="sp-adj-chip">stressful</span>
+          <span class="sp-adj-chip">horrible</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 23: SPEAKING — CHAOS COLLAGE -->
+<div class="slide" id="slide-23">
+  <div class="section-header">
+    <span class="sh-badge" style="background:#00ACC1;color:var(--deep);">SPEAKING</span>
+    <span class="sh-title">The Chaos Vacation Collage</span>
+    <div class="sh-right"><span class="sh-book">Pick your scene!</span></div>
+  </div>
+  <div class="slide-content">
+    <div class="sp-layout">
+      <div class="sp-collage-wrap">
+        <img src="images/chaos_collage.jpg" alt="Chaos Vacation Collage">
+        <div class="sp-bottom-bar">&#128483; Whose scene are you? Narrate it in Simple Past!</div>
+      </div>
+      <div class="sp-side">
+        <div class="sp-adj-box">
+          <div class="sp-adj-title">NEGATIVE ADJECTIVES</div>
+          <span class="sp-adj-chip">terrible</span>
+          <span class="sp-adj-chip">awful</span>
+          <span class="sp-adj-chip">disgusting</span>
+          <span class="sp-adj-chip">disappointing</span>
+          <span class="sp-adj-chip">overpriced</span>
+          <span class="sp-adj-chip">chaotic</span>
+          <span class="sp-adj-chip">exhausting</span>
+          <span class="sp-adj-chip">frustrating</span>
+          <span class="sp-adj-chip">stressful</span>
+          <span class="sp-adj-chip">horrible</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 24: LISTENING — PRE-LISTENING -->
 <div class="slide" id="slide-24">
   <div class="section-header">
-    <span class="sh-badge" style="background:#FF6B35;color:white;">SPEAKING</span>
-    <span class="sh-title">Chaos Vacation Witness</span>
-    <div class="sh-right"><span class="sh-book">10 min</span></div>
-  </div>
-  <div class="slide-content">
-    <div class="cvw-layout">
-      <div class="cvw-inst-layout" style="flex:1;">
-        <div style="font-size:52px;text-align:center;">&#128269;</div>
-        <div style="font-size:40px;font-weight:900;text-align:center;">Chaos Vacation Witness</div>
-        <div style="display:flex;flex-direction:column;gap:12px;width:100%;max-width:640px;">
-          <div class="cvw-inst-step">&#128483; <strong>"You are a witness!"</strong> Describe your scene in Simple Past.</div>
-          <div class="cvw-inst-step">&#128172; Use at least <strong>2 negative adjectives</strong> from the unit.</div>
-          <div class="cvw-inst-step">&#10067; The group will ask you <strong>one follow-up question</strong>.</div>
-        </div>
-      </div>
-      <div class="cvw-panel">
-        <div class="cvw-panel-title">Negative Adjectives</div>
-        <div class="cvw-adj">terrible</div><div class="cvw-adj">awful</div><div class="cvw-adj">disgusting</div><div class="cvw-adj">disappointing</div><div class="cvw-adj">chaotic</div><div class="cvw-adj">overpriced</div><div class="cvw-adj">exhausting</div><div class="cvw-adj">dreadful</div><div class="cvw-adj">horrible</div><div class="cvw-adj">unbearable</div><div class="cvw-adj">frustrating</div><div class="cvw-adj">miserable</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 25: Chaos Vacation Collage -->
-<div class="slide" id="slide-25">
-  <div class="section-header">
-    <span class="sh-badge" style="background:#FF6B35;color:white;">SPEAKING</span>
-    <span class="sh-title">The Chaos Vacation Collage</span>
-    <div class="sh-right"><span class="sh-book">Speaking</span></div>
-  </div>
-  <div class="slide-content">
-    <div class="cvw-layout">
-      <div class="cvw-main" style="flex:1;">
-        <img src="images/chaos_collage.jpg" alt="Chaos Vacation Collage" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="cvw-main-placeholder" style="display:none;">
-          <span style="font-size:40px;">&#128247;</span>
-          <span>chaos_collage.jpg</span>
-          <span style="font-size:12px;color:rgba(255,255,255,0.25);">Collage image pending</span>
-        </div>
-        <div class="cvw-bottom-bar">&#128483; Whose scene are you? Narrate it in Simple Past!</div>
-      </div>
-      <div class="cvw-panel">
-        <div class="cvw-panel-title">Negative Adjectives</div>
-        <div class="cvw-adj">terrible</div><div class="cvw-adj">awful</div><div class="cvw-adj">disgusting</div><div class="cvw-adj">disappointing</div><div class="cvw-adj">chaotic</div><div class="cvw-adj">overpriced</div><div class="cvw-adj">exhausting</div><div class="cvw-adj">dreadful</div><div class="cvw-adj">horrible</div><div class="cvw-adj">unbearable</div><div class="cvw-adj">frustrating</div><div class="cvw-adj">miserable</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== SLIDES 26–27: LISTENING — VLOG REWIND: SLANG SPOTTER ===== -->
-<!-- SLIDE 26: Pre-Listening -->
-<div class="slide" id="slide-26">
-  <div class="section-header">
-    <span class="sh-badge" style="background:#00BCD4;color:#0d0d2b;">LISTENING</span>
+    <span class="sh-badge" style="background:#00BCD4;color:#05046A;">LISTENING</span>
     <span class="sh-title">Vlog Rewind: Slang Spotter</span>
-    <div class="sh-right"><span class="sh-book">10 min</span></div>
+    <div class="sh-right">
+      <button class="lp-btn" onclick="openLP('listening')">LESSON PLAN</button>
+      <span class="sh-book">8 min</span>
+    </div>
   </div>
   <div class="slide-content">
     <div class="ls-layout">
-      <div class="ls-slangs">
+      <div class="ls-main">
         <div class="ls-inst">&#128266; Listen carefully! Raise your hand every time you hear a slang!</div>
         <div class="ls-slangs-grid">
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:8px;">Session 2 Slangs</div>
-            <div class="ls-slang-card"><div class="ls-slang-num">1</div><div class="ls-slang-text">It was a total blast</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;"><div class="ls-slang-num">2</div><div class="ls-slang-text">It was so worth it</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;"><div class="ls-slang-num">3</div><div class="ls-slang-text">Hit the road</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;"><div class="ls-slang-num">4</div><div class="ls-slang-text">Go with the flow</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;"><div class="ls-slang-num">5</div><div class="ls-slang-text">It's a no-brainer</div></div>
+          <div class="ls-col">
+            <div class="ls-col-title" style="background:rgba(0,87,255,0.25);color:#7bb3ff;">SESSION 2 SLANGS</div>
+            <div class="ls-slang-card"><div class="ls-slang-num" style="background:#0057FF;">1</div><div class="ls-slang-text">It was a total blast</div></div>
+            <div class="ls-slang-card"><div class="ls-slang-num" style="background:#0057FF;">2</div><div class="ls-slang-text">It was so worth it</div></div>
+            <div class="ls-slang-card"><div class="ls-slang-num" style="background:#0057FF;">3</div><div class="ls-slang-text">Hit the road</div></div>
+            <div class="ls-slang-card"><div class="ls-slang-num" style="background:#0057FF;">4</div><div class="ls-slang-text">Go with the flow</div></div>
+            <div class="ls-slang-card"><div class="ls-slang-num" style="background:#0057FF;">5</div><div class="ls-slang-text">It's a no-brainer</div></div>
           </div>
-          <div>
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;font-weight:900;margin-bottom:8px;">Session 4 Slangs</div>
+          <div class="ls-col">
+            <div class="ls-col-title" style="background:rgba(0,188,212,0.25);color:var(--teal);">SESSION 4 SLANGS</div>
             <div class="ls-slang-card" style="border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">6</div><div class="ls-slang-text">I'm not a big fan of that</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">7</div><div class="ls-slang-text">It was a rip-off</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">8</div><div class="ls-slang-text">I'm beat</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">9</div><div class="ls-slang-text">It's not my cup of tea</div></div>
-            <div class="ls-slang-card" style="margin-top:8px;border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">10</div><div class="ls-slang-text">We hit the jackpot</div></div>
+            <div class="ls-slang-card" style="border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">7</div><div class="ls-slang-text">It was a rip-off</div></div>
+            <div class="ls-slang-card" style="border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">8</div><div class="ls-slang-text">I'm beat</div></div>
+            <div class="ls-slang-card" style="border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">9</div><div class="ls-slang-text">It's not my cup of tea</div></div>
+            <div class="ls-slang-card" style="border-color:rgba(0,188,212,0.3);"><div class="ls-slang-num" style="background:var(--teal);">10</div><div class="ls-slang-text">We hit the jackpot</div></div>
           </div>
         </div>
-        <div style="display:flex;justify-content:center;">
+        <div class="ls-audio-row">
           <button class="ls-audio-btn" id="ls-audio-btn" onclick="toggleAudio()">&#9654; PLAY VLOG AUDIO</button>
         </div>
+        <audio id="ls-audio" src="audio/maya_vlog.mp3"></audio>
       </div>
     </div>
-    <audio id="ls-audio" src="audio/Maya_Vlog_Audio_S5_L4_U4.mp3"></audio>
   </div>
 </div>
 
-<!-- SLIDE 27: Post-Listening -->
-<div class="slide" id="slide-27">
+<!-- SLIDE 25: LISTENING — POST-LISTENING -->
+<div class="slide" id="slide-25">
   <div class="section-header">
-    <span class="sh-badge" style="background:#00BCD4;color:#0d0d2b;">LISTENING</span>
+    <span class="sh-badge" style="background:#00BCD4;color:#05046A;">LISTENING</span>
     <span class="sh-title">Did you catch them all?</span>
     <div class="sh-right"><span class="sh-book">Comprehension</span></div>
   </div>
-  <div class="slide-content" style="padding:10px 20px;gap:8px;">
-    <div style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:4px;">Click REVEAL ANSWER, then REVEAL SLANG for each question</div>
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
-      <button onclick="prevQ()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;">&#9664; Prev</button>
-      <div style="flex:1;text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.5);" id="q-counter">Question 1 / 10</div>
-      <button onclick="nextQ()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;">Next &#9654;</button>
-    </div>
-    <div id="q-cards-container" style="flex:1;position:relative;">
+  <div class="slide-content">
+    <div class="pl-layout">
+      <div class="pl-nav-row">
+        <button class="pl-nav-btn" onclick="prevPLQ()">&#9664; Prev</button>
+        <div class="pl-counter" id="pl-counter">Question 1 / 10</div>
+        <button class="pl-nav-btn" onclick="nextPLQ()">Next &#9654;</button>
+      </div>
+      <div id="pl-cards"></div>
     </div>
   </div>
 </div>
 
-<div class="slide" id="slide-28">
+<!-- SLIDE 26: EXIT TICKET -->
+<div class="slide" id="slide-26">
   <div class="section-header">
-    <span class="sh-badge" style="background:#FF3B3B;color:white;">EXIT TICKET</span>
+    <span class="sh-badge" style="background:#E53935;color:white;">EXIT TICKET</span>
     <span class="sh-title">My Week in One Sentence</span>
-    <div class="sh-right"><span class="sh-book">5 min</span></div>
+    <div class="sh-right">
+      <button class="lp-btn" onclick="openLP('exitticket')">LESSON PLAN</button>
+      <span class="sh-book">5 min</span>
+    </div>
   </div>
   <div class="slide-content" style="position:relative;">
-    <div class="et-confetti" id="et-confetti"></div>
+    <div class="et-confetti-wrap" id="et-confetti"></div>
     <div class="et-layout">
-      <div style="font-size:44px;text-align:center;">&#127881;</div>
+      <div style="font-size:48px;text-align:center;">&#127881;</div>
       <div class="et-frame">
         <div class="et-frame-text">
           "This week I <span>[verb-past]</span> that <span>[adjective]</span> trips can be <span>[adjective]</span>,<br>
@@ -483,288 +668,412 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--deep);font-fam
   </div>
 </div>
 
+</div><!-- /slides-wrap -->
+
+<!-- LESSON PLAN MODAL -->
+<div class="lp-overlay" id="lpOverlay" onclick="if(event.target===this)closeLP()">
+  <div class="lp-modal" id="lpModal">
+    <button class="lp-close" onclick="closeLP()">&#215;</button>
+    <div id="lpContent"></div>
+  </div>
+</div>
+
 <script>
-// ===== DATA =====
-const TRIP_CARDS = [
-  {num:1, scene:"Luxurious infinity pool at a 5-star resort", img:"images/trip/trip_01.jpg"},
-  {num:2, scene:"Cramped, dirty budget hostel room", img:"images/trip/trip_02.jpg"},
-  {num:3, scene:"Breathtaking mountain sunrise view", img:"images/trip/trip_03.jpg"},
-  {num:4, scene:"Chaotic, overcrowded airport terminal", img:"images/trip/trip_04.jpg"},
-  {num:5, scene:"Romantic candlelit dinner on a beach", img:"images/trip/trip_05.jpg"},
-  {num:6, scene:"Broken-down tour bus in the middle of nowhere", img:"images/trip/trip_06.jpg"},
-  {num:7, scene:"Vibrant local street food market", img:"images/trip/trip_07.jpg"},
-  {num:8, scene:"Stormy, grey beach with rough waves", img:"images/trip/trip_08.jpg"}
-];
+// ── LP DATA ────────────────────────────────────────────────
+const LP_DATA = {
+  cover: {
+    badge:'UNIT OVERVIEW', badgeColor:'#F1C405', badgeTextColor:'#05046A',
+    title:'On Vacation! — Session 5',
+    book:'pp. 74–91',
+    goal:'Students review and consolidate all vocabulary, grammar, speaking, and listening skills from the week, demonstrating mastery through interactive activities.',
+    cues:'General Information: Program SENIORS · Level 4 · Week 4 · Unit 04 · Session 5 (Friday Review)',
+    dos:'Key Vocabulary: Adjectives + intensifiers · Travel experiences. Grammar: Simple Past (regular + irregular). Slangs S2 + S4.',
+    donts:'Do NOT introduce new content. This is a full review session — focus on fluency and confidence.'
+  },
+  warmup: {
+    badge:'WARM-UP', badgeColor:'#7B2FBE',
+    title:'Two Truths and a Lie — Vacation Edition',
+    book:'No book page',
+    goal:'Students activate Simple Past and travel vocabulary in a fun, competitive context while practicing listening and critical thinking.',
+    cues:'"[Name], share your three statements! Class, listen carefully — which one is the lie? Use the timer to think!"',
+    dos:'Encourage dramatic or funny statements. Give 30 seconds to think before voting.',
+    donts:'Do NOT reveal the lie before everyone has voted.'
+  },
+  vocabprac: {
+    badge:'VOCAB PRACTICE', badgeColor:'#F1C405', badgeTextColor:'#05046A',
+    title:'Trip Rating',
+    book:'pp. 82–83',
+    goal:'Students review travel adjectives and intensifiers by rating real travel scenarios and justifying their answers.',
+    cues:'"Look at this image. [Name], what rating would you give it? Why? Use an adjective and an intensifier!"',
+    dos:'Push students to use intensifiers, not just adjectives. Celebrate creative combinations.',
+    donts:'Do NOT accept one-word answers. Always ask "Why?" to elicit the full sentence.'
+  },
+  grammarprac: {
+    badge:'GRAM. PRACTICE', badgeColor:'#E91E8C',
+    title:'Verb Time Machine',
+    book:'pp. 79–80',
+    goal:'Students recall and produce Simple Past forms of irregular verbs and use them in spontaneous sentences.',
+    cues:'"[Name], what is the Simple Past of GO? Correct! Now make a sentence with WENT. Use the photo as inspiration!"',
+    dos:'Celebrate correct irregular forms. If wrong, give the correct form and ask them to repeat in a sentence.',
+    donts:'Do NOT skip the sentence-making step — that is where the real practice happens.'
+  },
+  speaking: {
+    badge:'SPEAKING', badgeColor:'#00ACC1',
+    title:'Chaos Vacation Witness',
+    book:'pp. 82–83',
+    goal:'Students produce spontaneous oral narratives in Simple Past using negative adjectives from the unit.',
+    cues:'"[Name], pick a scene! What happened? Tell us the story in Simple Past. Class, ask one follow-up question!"',
+    dos:'Encourage dramatic storytelling. Prompt with "And then what happened?"',
+    donts:'Do NOT interrupt the student\'s narrative to correct minor errors.'
+  },
+  listening: {
+    badge:'LISTENING', badgeColor:'#00BCD4', badgeTextColor:'#05046A',
+    title:'Vlog Rewind: Slang Spotter',
+    book:'No book page',
+    goal:'Students identify all 10 slangs from Sessions 2 and 4 in a natural spoken context and answer comprehension questions.',
+    cues:'"Raise your hand every time you hear a slang! Ready? Here we go!"',
+    dos:'Play the audio twice if needed. Use the post-listening questions to check comprehension.',
+    donts:'Do NOT tell students which slangs appear before playing — let them discover them.'
+  },
+  exitticket: {
+    badge:'EXIT TICKET', badgeColor:'#E53935',
+    title:'My Week in One Sentence',
+    book:'No book page',
+    goal:'Students produce one creative sentence that demonstrates mastery of Simple Past, unit adjectives, and a slang from the week.',
+    cues:'"[Name], complete the sentence frame — or create your own! Make it creative and personal!"',
+    dos:'Celebrate every attempt. Share the best sentences with the group.',
+    donts:'Do NOT require the exact frame — creativity is encouraged.'
+  }
+};
 
-const VERB_ROUNDS = [
-  {verb:"go", past:"went", photo:"images/verbs/verb_01.jpg", scene:"Person at airport departure gate"},
-  {verb:"visit", past:"visited", photo:"images/verbs/verb_02.jpg", scene:"Tourist at ancient ruins"},
-  {verb:"eat", past:"ate", photo:"images/verbs/verb_03.jpg", scene:"Colorful local food spread"},
-  {verb:"lose", past:"lost", photo:"images/verbs/verb_04.jpg", scene:"Person distressed at luggage carousel"},
-  {verb:"stay", past:"stayed", photo:"images/verbs/verb_05.jpg", scene:"Hotel room interior"},
-  {verb:"take", past:"took", photo:"images/verbs/verb_06.jpg", scene:"Person taking selfie at landmark"},
-  {verb:"see", past:"saw", photo:"images/verbs/verb_07.jpg", scene:"Wildlife safari scene"},
-  {verb:"travel", past:"traveled", photo:"images/verbs/verb_08.jpg", scene:"Train through scenic countryside"},
-  {verb:"meet", past:"met", photo:"images/verbs/verb_09.jpg", scene:"Group of travelers laughing"},
-  {verb:"forget", past:"forgot", photo:"images/verbs/verb_10.jpg", scene:"Person looking in messy bag"}
-];
+function openLP(key) {
+  const d = LP_DATA[key];
+  if(!d) return;
+  document.getElementById('lpContent').innerHTML = `
+    <div class="lp-header">
+      <span class="lp-activity-badge" style="background:${d.badgeColor||'rgba(255,255,255,0.1)'};color:${d.badgeTextColor||'white'}">${d.badge}</span>
+      <div class="lp-activity-title">${d.title}</div>
+      <div class="lp-meta">Book: ${d.book}</div>
+    </div>
+    <div class="lp-section">
+      <div class="lp-section-title">LEARNING GOAL</div>
+      <div class="lp-section-body">${d.goal}</div>
+    </div>
+    <div class="lp-section">
+      <div class="lp-section-title">TEACHER CUES</div>
+      <div class="lp-section-body" style="font-style:italic;">${d.cues}</div>
+    </div>
+    <div class="lp-grid">
+      <div class="lp-box lp-do">
+        <div class="lp-box-title">DO'S ✓</div>
+        <div class="lp-box-body">${d.dos}</div>
+      </div>
+      <div class="lp-box lp-dont">
+        <div class="lp-box-title">DON'TS ✗</div>
+        <div class="lp-box-body">${d.donts}</div>
+      </div>
+    </div>`;
+  document.getElementById('lpOverlay').classList.add('open');
+}
+function closeLP() { document.getElementById('lpOverlay').classList.remove('open'); }
 
-const WB_HTML = `<div class="wb-panel">
-  <div class="wb-section-title">Adjectives</div>
-  <div class="wb-word">amazing</div><div class="wb-word">terrible</div><div class="wb-word">breathtaking</div><div class="wb-word">awful</div><div class="wb-word">stunning</div><div class="wb-word">disgusting</div><div class="wb-word">incredible</div><div class="wb-word">disappointing</div><div class="wb-word">chaotic</div><div class="wb-word">peaceful</div><div class="wb-word">overpriced</div><div class="wb-word">cozy</div><div class="wb-word">exhausting</div><div class="wb-word">romantic</div><div class="wb-word">vibrant</div>
-  <div class="wb-section-title" style="margin-top:10px;">Intensifiers</div>
-  <div class="wb-word">absolutely</div><div class="wb-word">completely</div><div class="wb-word">totally</div><div class="wb-word">incredibly</div><div class="wb-word">really</div><div class="wb-word">quite</div><div class="wb-word">rather</div><div class="wb-word">extremely</div><div class="wb-word">so</div><div class="wb-word">very</div>
+// ── SLIDES NAV ─────────────────────────────────────────────
+const SLIDE_IDS = ['slide-0','slide-1','slide-2','slide-3','slide-4','slide-5','slide-6','slide-7','slide-8','slide-9','slide-10',
+  'slide-11','slide-12','slide-13','slide-14','slide-15','slide-16','slide-17','slide-18','slide-19','slide-20','slide-21',
+  'slide-22','slide-23','slide-24','slide-25','slide-26'];
+const SLIDE_NAMES = ['Cover','Warm-up',
+  'VP: Inst','VP: 1','VP: 2','VP: 3','VP: 4','VP: 5','VP: 6','VP: 7','VP: 8',
+  'GP: Inst','GP: 1','GP: 2','GP: 3','GP: 4','GP: 5','GP: 6','GP: 7','GP: 8','GP: 9','GP: 10',
+  'Sp: Inst','Speaking','Listening','Post-Listen','Exit Ticket'];
+let cur = 0;
+const pillsEl = document.getElementById('navPills');
+SLIDE_NAMES.forEach((n,i)=>{
+  const p = document.createElement('button');
+  p.className = 'nav-pill'+(i===0?' active':'');
+  p.textContent = n;
+  p.onclick = ()=>goToSlide(i);
+  pillsEl.appendChild(p);
+});
+function goToSlide(n){
+  const prevEl = document.getElementById(SLIDE_IDS[cur]);
+  if(prevEl) prevEl.classList.remove('active');
+  document.querySelectorAll('.nav-pill')[cur].classList.remove('active');
+  cur = n;
+  const nextEl = document.getElementById(SLIDE_IDS[cur]);
+  if(nextEl) nextEl.classList.add('active');
+  document.querySelectorAll('.nav-pill')[cur].classList.add('active');
+  document.getElementById('navCounter').textContent = (cur+1)+' / '+SLIDE_IDS.length;
+}
+goToSlide(0);
+function nextSlide(){if(cur<SLIDE_IDS.length-1)goToSlide(cur+1);}
+function prevSlide(){if(cur>0)goToSlide(cur-1);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ')nextSlide();
+  if(e.key==='ArrowLeft')prevSlide();
+});
+
+// ── BUILD TRIP RATING SLIDES 4–10 ─────────────────────────
+const TRIP_SCENES = [
+  'Cramped, dirty budget hostel room',
+  'Breathtaking mountain sunrise view',
+  'Chaotic, overcrowded airport terminal',
+  'Romantic candlelit dinner on a beach',
+  'Broken-down tour bus in the middle of nowhere',
+  'Vibrant local street food market',
+  'Stormy, grey beach with rough waves'
+];
+const WB_HTML = `<div class="tr-wb-title">WORD BANK</div>
+<div class="tr-wb-group"><div class="tr-wb-group-label">ADJECTIVES</div>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">amazing</span>
+<span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">terrible</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">breathtaking</span>
+<span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">awful</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">stunning</span>
+<span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">disgusting</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">incredible</span>
+<span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">disappointing</span>
+<span class="tr-wb-chip" style="background:rgba(241,196,5,0.15);border:1px solid rgba(241,196,5,0.3);color:var(--yellow);">chaotic</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">peaceful</span>
+<span class="tr-wb-chip" style="background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.3);color:#ff6b6b;">overpriced</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">cozy</span>
+<span class="tr-wb-chip" style="background:rgba(241,196,5,0.15);border:1px solid rgba(241,196,5,0.3);color:var(--yellow);">exhausting</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">romantic</span>
+<span class="tr-wb-chip" style="background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);color:var(--green);">vibrant</span>
+</div>
+<div class="tr-wb-group"><div class="tr-wb-group-label">INTENSIFIERS</div>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">absolutely</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">completely</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">totally</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">incredibly</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">really</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">extremely</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">so</span>
+<span class="tr-wb-chip" style="background:rgba(0,188,212,0.15);border:1px solid rgba(0,188,212,0.3);color:var(--teal);">very</span>
 </div>`;
 
-// ===== BUILD TRIP RATING SLIDES =====
-function buildTripSlides(){
-  const container = document.body;
-  TRIP_CARDS.forEach((card, i) => {
-    const slideNum = 3 + i; // slides 3-10
-    const div = document.createElement('div');
-    div.className = 'slide';
-    div.id = 'slide-' + slideNum;
-    div.innerHTML = `
-      <div class="section-header">
-        <span class="sh-badge" style="background:#F1C405;color:#0d0d2b;">VOCAB PRACTICE</span>
-        <span class="sh-title">Trip Rating</span>
-        <div class="sh-right"><span class="sh-book">Card ${card.num} of 8</span></div>
-      </div>
-      <div class="slide-content">
-        <div class="tr-layout">
-          <div class="tr-main">
-            <div class="tr-image-wrap">
-              <div class="tr-card-num">Card ${card.num}</div>
-              <img src="${card.img}" alt="${card.scene}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="tr-image-placeholder">
-                <span style="font-size:36px;">&#128247;</span>
-                <span>${card.img.split('/').pop()}</span>
-                <span style="font-size:12px;color:rgba(255,255,255,0.25);">${card.scene}</span>
-              </div>
-            </div>
-            <div class="tr-stars-bar" id="stars-${slideNum}">
-              ${[1,2,3,4,5].map(s=>`<span class="tr-star" onclick="rateStar(${slideNum},${s})">&#9733;</span>`).join('')}
-            </div>
+const wrap = document.getElementById('slidesWrap');
+// Build trip slides 4-10 (cards 2-8)
+for(let i=2;i<=8;i++){
+  const slideEl = document.createElement('div');
+  slideEl.className = 'slide';
+  slideEl.id = 'slide-'+(i+1);
+  const prevSlideIdx = i;
+  const nextSlideIdx = i===8 ? 11 : i+2;
+  slideEl.innerHTML = `
+    <div class="section-header">
+      <span class="sh-badge" style="background:#F1C405;color:#05046A;">VOCAB PRACTICE</span>
+      <span class="sh-title">Trip Rating</span>
+      <div class="sh-right"><span class="sh-book">Card ${i} / 8</span></div>
+    </div>
+    <div class="slide-content">
+      <div class="tr-layout">
+        <div class="tr-main">
+          <div class="tr-img-wrap">
+            <img src="images/trip/trip_0${i<10?'0'+i:i}.jpg" alt="Trip ${i}">
+            <div class="tr-card-num">CARD ${i} / 8</div>
           </div>
-          ${WB_HTML}
-        </div>
-      </div>`;
-    // Insert before slide-13
-    const ref = document.getElementById('slide-13');
-    container.insertBefore(div, ref);
-  });
-}
-
-// ===== BUILD VERB TIME MACHINE SLIDES =====
-function buildVerbSlides(){
-  const container = document.body;
-  VERB_ROUNDS.forEach((round, i) => {
-    const slideNum = 14 + i; // slides 14-23
-    const div = document.createElement('div');
-    div.className = 'slide';
-    div.id = 'slide-' + slideNum;
-    div.innerHTML = `
-      <div class="section-header">
-        <span class="sh-badge" style="background:#00C853;color:#0d0d2b;">GRAM. PRACTICE</span>
-        <span class="sh-title">Verb Time Machine &mdash; Round ${i+1}</span>
-        <div class="sh-right"><span class="sh-book">${i+1} / 10</span></div>
-      </div>
-      <div class="slide-content" style="padding:0;">
-        <div class="vtm-layout">
-          <div class="vtm-left">
-            <div class="vtm-label">BASE FORM</div>
-            <div class="vtm-verb">${round.verb}</div>
-            <div class="vtm-blank">Simple Past: <span id="vtm-answer-${slideNum}" class="vtm-answer">___________</span></div>
-            <button class="vtm-reveal-btn" onclick="revealVerb(${slideNum},'${round.past}')">&#9989; Reveal Answer</button>
+          <div class="tr-stars" id="stars-${i}">
+            <span class="tr-star" onclick="rateStar(${i},1)">&#9733;</span>
+            <span class="tr-star" onclick="rateStar(${i},2)">&#9733;</span>
+            <span class="tr-star" onclick="rateStar(${i},3)">&#9733;</span>
+            <span class="tr-star" onclick="rateStar(${i},4)">&#9733;</span>
+            <span class="tr-star" onclick="rateStar(${i},5)">&#9733;</span>
           </div>
-          <div class="vtm-right">
-            <img src="${round.photo}" alt="${round.scene}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div class="vtm-right-placeholder">
-              <span style="font-size:36px;">&#128247;</span>
-              <span>${round.photo.split('/').pop()}</span>
-              <span style="font-size:12px;color:rgba(255,255,255,0.25);">${round.scene}</span>
-            </div>
-            <div class="vtm-make-label">Make a sentence!</div>
+          <div class="tr-nav-row">
+            <button class="tr-nav-btn secondary" onclick="goToSlide(${prevSlideIdx})">&#9664; Back</button>
+            <button class="tr-nav-btn" onclick="goToSlide(${nextSlideIdx})">${i===8?'Grammar Practice &#9654;':'Next &#9654;'}</button>
           </div>
         </div>
-      </div>`;
-    // Insert before slide-24
-    const ref = document.getElementById('slide-24');
-    container.insertBefore(div, ref);
-  });
+        <div class="tr-side"><div class="tr-wordbank">${WB_HTML}</div></div>
+      </div>
+    </div>`;
+  // Insert before slide-11
+  const slide11 = document.getElementById('slide-11');
+  wrap.insertBefore(slideEl, slide11);
 }
 
-// ===== STAR RATING =====
-function rateStar(slideNum, rating){
-  const stars = document.querySelectorAll(`#stars-${slideNum} .tr-star`);
-  stars.forEach((s,i) => s.classList.toggle('active', i < rating));
-}
+// Build verb time machine slides 12-21
+const VERBS = [
+  {base:'go', past:'went', img:'verb_01.jpg'},
+  {base:'visit', past:'visited', img:'verb_02.jpg'},
+  {base:'eat', past:'ate', img:'verb_03.jpg'},
+  {base:'lose', past:'lost', img:'verb_04.jpg'},
+  {base:'stay', past:'stayed', img:'verb_05.jpg'},
+  {base:'take', past:'took', img:'verb_06.jpg'},
+  {base:'see', past:'saw', img:'verb_07.jpg'},
+  {base:'travel', past:'traveled', img:'verb_08.jpg'},
+  {base:'meet', past:'met', img:'verb_09.jpg'},
+  {base:'forget', past:'forgot', img:'verb_10.jpg'}
+];
+const slide22 = document.getElementById('slide-22');
+VERBS.forEach((v,i)=>{
+  const slideEl = document.createElement('div');
+  slideEl.className = 'slide';
+  slideEl.id = 'slide-'+(12+i);
+  const prevIdx = i===0 ? 11 : 11+i;
+  const nextIdx = i===9 ? 22 : 12+i+1;
+  slideEl.innerHTML = `
+    <div class="section-header">
+      <span class="sh-badge" style="background:#E91E8C;color:white;">GRAM. PRACTICE</span>
+      <span class="sh-title">Verb Time Machine</span>
+      <div class="sh-right"><span class="sh-book">Round ${i+1} / 10</span></div>
+    </div>
+    <div class="slide-content">
+      <div class="vtm-layout">
+        <div class="vtm-left">
+          <div class="vtm-verb-base">${v.base}</div>
+          <div class="vtm-blank-row">
+            <span class="vtm-blank-label">SIMPLE PAST:</span>
+            <span class="vtm-blank" id="vtm-blank-${i}">___________</span>
+          </div>
+          <button class="vtm-reveal-btn" id="vtm-btn-${i}" onclick="revealVerb(${i},'${v.past}')">&#10003; REVEAL</button>
+        </div>
+        <div class="vtm-right">
+          <div class="vtm-img-wrap">
+            <img src="images/verbs/${v.img}" alt="${v.base}">
+            <div class="vtm-make-label">&#128172; Make a sentence!</div>
+          </div>
+          <div class="vtm-nav-row">
+            <button class="vtm-nav-btn secondary" onclick="goToSlide(${prevIdx})">&#9664; Back</button>
+            <button class="vtm-nav-btn" onclick="goToSlide(${nextIdx})">${i===9?'Speaking &#9654;':'Next &#9654;'}</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  wrap.insertBefore(slideEl, slide22);
+});
 
-// ===== VERB REVEAL =====
-function revealVerb(slideNum, past){
-  const el = document.getElementById('vtm-answer-' + slideNum);
-  el.textContent = past;
-  el.classList.add('show');
-}
-
-// ===== TIMER =====
+// ── WARM-UP TIMER ──────────────────────────────────────────
 let wuTimerInterval = null;
-let wuSeconds = 30;
+let wuTimeLeft = 30;
 function startWuTimer(){
-  if(wuTimerInterval) return;
+  clearInterval(wuTimerInterval);
+  wuTimeLeft = 30;
+  document.getElementById('wuTimer').textContent = wuTimeLeft;
+  document.getElementById('wuTimer').style.color = 'var(--yellow)';
   wuTimerInterval = setInterval(()=>{
-    wuSeconds--;
-    const d = document.getElementById('wu-timer-display');
-    d.textContent = '0:' + String(wuSeconds).padStart(2,'0');
-    if(wuSeconds <= 5) d.classList.add('urgent');
-    if(wuSeconds <= 0){ clearInterval(wuTimerInterval); wuTimerInterval=null; d.textContent='Time!'; }
-  }, 1000);
-}
-function resetWuTimer(){
-  clearInterval(wuTimerInterval); wuTimerInterval=null; wuSeconds=30;
-  const d = document.getElementById('wu-timer-display');
-  d.textContent='0:30'; d.classList.remove('urgent');
+    wuTimeLeft--;
+    document.getElementById('wuTimer').textContent = wuTimeLeft;
+    if(wuTimeLeft<=10) document.getElementById('wuTimer').style.color = 'var(--red)';
+    if(wuTimeLeft<=0){ clearInterval(wuTimerInterval); document.getElementById('wuTimer').textContent = '0'; }
+  },1000);
 }
 
-// ===== VOTE BUTTONS =====
-function toggleVote(id){ document.getElementById(id).classList.toggle('voted'); }
+// ── TRIP RATING STARS ──────────────────────────────────────
+function rateStar(card, n){
+  const stars = document.querySelectorAll('#stars-'+card+' .tr-star');
+  stars.forEach((s,i)=>{ s.classList.toggle('active', i<n); });
+}
 
-// ===== AUDIO =====
+// ── VERB TIME MACHINE ──────────────────────────────────────
+function revealVerb(i, past){
+  const blank = document.getElementById('vtm-blank-'+i);
+  const btn = document.getElementById('vtm-btn-'+i);
+  blank.textContent = past;
+  blank.classList.add('revealed');
+  btn.disabled = true;
+}
+
+// ── AUDIO ──────────────────────────────────────────────────
 function toggleAudio(){
   const audio = document.getElementById('ls-audio');
   const btn = document.getElementById('ls-audio-btn');
-  if(audio.paused){ audio.play(); btn.textContent='⏹ STOP AUDIO'; btn.classList.add('playing'); }
-  else { audio.pause(); audio.currentTime=0; btn.textContent='▶ PLAY VLOG AUDIO'; btn.classList.remove('playing'); }
-}
-
-// ===== CONFETTI =====
-function buildConfetti(){
-  const c = document.getElementById('et-confetti');
-  const colors=['#F1C405','#FF6B35','#00C853','#00BCD4','#FF3B3B','#7B2FBE'];
-  for(let i=0;i<40;i++){
-    const s=document.createElement('span');
-    s.style.cssText=`left:${Math.random()*100}%;background:${colors[i%colors.length]};animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*2}s;`;
-    c.appendChild(s);
+  if(audio.paused){
+    audio.play();
+    btn.textContent = '⏹ STOP AUDIO';
+    btn.classList.add('playing');
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    btn.textContent = '▶ PLAY VLOG AUDIO';
+    btn.classList.remove('playing');
   }
 }
 
-// ===== NAVIGATION =====
-let currentSlide = 0;
-let slides = [];
-
-function buildNav(){
-  slides = Array.from(document.querySelectorAll('.slide'));
-  document.getElementById('navCounter').textContent = '1/' + slides.length;
-}
-
-function goToSlide(n){
-  if(n===27){setTimeout(buildQCards,50);}
-  slides[currentSlide].classList.remove('active');
-  currentSlide = Math.max(0, Math.min(n, slides.length-1));
-  slides[currentSlide].classList.add('active');
-  document.getElementById('navCounter').textContent = (currentSlide+1) + '/' + slides.length;
-  updateNavbar();
-}
-
-function changeSlide(dir){
-  goToSlide(currentSlide + dir);
-}
-
-function updateNavbar(){
-  const btns = document.querySelectorAll('.nb-btn');
-  const ranges = [
-    {btn:0, start:0, end:0},
-    {btn:1, start:1, end:1},
-    {btn:2, start:2, end:11},
-    {btn:3, start:12, end:23},
-    {btn:4, start:24, end:25},
-    {btn:5, start:26, end:27},
-    {btn:6, start:28, end:28}
-  ];
-  btns.forEach((b,i) => {
-    const r = ranges[i];
-    b.classList.toggle('active', r && currentSlide >= r.start && currentSlide <= r.end);
-  });
-}
-
-document.addEventListener('keydown', e => {
-  if(e.key==='ArrowRight'||e.key==='ArrowDown') changeSlide(1);
-  if(e.key==='ArrowLeft'||e.key==='ArrowUp') changeSlide(-1);
-});
-
-// ===== INIT =====
-(function(){
-  buildTripSlides();
-  buildVerbSlides();
-  buildConfetti();
-  buildNav();
-  slides[0].classList.add('active');
-  updateNavbar();
-})();
-
-// ===== POST-LISTENING v2 =====
+// ── POST-LISTENING QUESTIONS ───────────────────────────────
 const PL_QUESTIONS = [
   {q:"How was Maya's trip overall? Did she enjoy it?", a:"She had an amazing time — she loved every moment of it.", s:'"It was a total blast!"'},
   {q:"How did her trip start? What happened at the beginning?", a:"She started her journey but her flight was delayed 4 hours.", s:'"Hit the road"'},
-  {q:"How did she feel about the 4-hour delay?", a:"She didn't like it at all — it was frustrating for her.", s:'"I'm not a big fan of that"'},
+  {q:"How did she feel about the 4-hour delay?", a:"She didn't like it at all — it was frustrating for her.", s:'"I\'m not a big fan of that"'},
   {q:"Was the hotel a good deal? What did she think about the price?", a:"No — she paid $400 for a terrible room with no hot water.", s:'"It was a rip-off"'},
-  {q:"How did Maya feel when she finally got to the beach?", a:"She was completely exhausted — she could barely walk.", s:'"I'm beat"'},
+  {q:"How did Maya feel when she finally got to the beach?", a:"She was completely exhausted — she could barely walk.", s:'"I\'m beat"'},
   {q:"What happened when she found the hidden cove?", a:"She found a perfect, empty beach with crystal blue water — a wonderful surprise.", s:'"We hit the jackpot"'},
-  {q:"Does Maya usually enjoy street food?", a:"No — it's not something she normally likes or chooses.", s:'"It's not my cup of tea"'},
+  {q:"Does Maya usually enjoy street food?", a:"No — it's not something she normally likes or chooses.", s:'"It\'s not my cup of tea"'},
   {q:"What did her friend suggest she do about the food?", a:"Her friend told her to relax and just enjoy whatever comes.", s:'"Go with the flow"'},
-  {q:"After trying the tacos, was it an easy decision to always try local food?", a:"Yes — she said it's an obvious choice now, no doubt about it.", s:'"It's a no-brainer"'},
+  {q:"After trying the tacos, was it an easy decision to always try local food?", a:"Yes — she said it's an obvious choice now, no doubt about it.", s:'"It\'s a no-brainer"'},
   {q:"After all the chaos — does she regret the trip?", a:"No — she says every difficult moment was completely worth it.", s:'"It was so worth it"'}
 ];
-let currentQ = 0;
+let plCur = 0;
 
-function buildQCards() {
-  const container = document.getElementById('q-cards-container');
-  if (!container) return;
-  container.innerHTML = '';
-  PL_QUESTIONS.forEach((item, i) => {
+function buildPLCards(){
+  const container = document.getElementById('pl-cards');
+  if(!container || container.children.length > 0) return;
+  PL_QUESTIONS.forEach((item,i)=>{
     const card = document.createElement('div');
-    card.className = 'plv2-card' + (i === 0 ? ' active' : '');
-    card.id = 'plv2-card-' + i;
+    card.className = 'pl-card'+(i===0?' active':'');
+    card.id = 'pl-card-'+i;
     card.innerHTML = `
-      <div class="plv2-q-num">QUESTION ${i+1} OF 10</div>
-      <div class="plv2-q-text">${item.q}</div>
-      <div class="plv2-reveal-row">
-        <button class="plv2-btn plv2-btn-answer" id="btn-ans-${i}" onclick="revealAnswer(${i})">&#10003; REVEAL ANSWER</button>
-        <button class="plv2-btn plv2-btn-slang" id="btn-slang-${i}" onclick="revealSlang(${i})" disabled>&#128172; REVEAL SLANG</button>
+      <div class="pl-q-num">QUESTION ${i+1} OF 10</div>
+      <div class="pl-q-text">${item.q}</div>
+      <div class="pl-reveal-row">
+        <button class="pl-btn pl-btn-answer" id="pl-btn-ans-${i}" onclick="revealPLAnswer(${i})">&#10003; REVEAL ANSWER</button>
+        <button class="pl-btn pl-btn-slang" id="pl-btn-slang-${i}" onclick="revealPLSlang(${i})" disabled>&#128172; REVEAL SLANG</button>
       </div>
-      <div class="plv2-answer" id="ans-${i}">&#10003; ${item.a}</div>
-      <div class="plv2-slang" id="slang-${i}">&#128172; ${item.s}</div>
-    `;
+      <div class="pl-answer" id="pl-ans-${i}">&#10003; ${item.a}</div>
+      <div class="pl-slang" id="pl-slang-${i}">&#128172; ${item.s}</div>`;
     container.appendChild(card);
   });
 }
 
-function revealAnswer(i) {
-  document.getElementById('ans-' + i).classList.add('visible');
-  document.getElementById('btn-ans-' + i).disabled = true;
-  document.getElementById('btn-slang-' + i).disabled = false;
+function revealPLAnswer(i){
+  document.getElementById('pl-ans-'+i).classList.add('visible');
+  document.getElementById('pl-btn-ans-'+i).disabled = true;
+  document.getElementById('pl-btn-slang-'+i).disabled = false;
 }
-
-function revealSlang(i) {
-  document.getElementById('slang-' + i).classList.add('visible');
-  document.getElementById('btn-slang-' + i).disabled = true;
+function revealPLSlang(i){
+  document.getElementById('pl-slang-'+i).classList.add('visible');
+  document.getElementById('pl-btn-slang-'+i).disabled = true;
 }
-
-function showQ(n) {
-  document.querySelectorAll('.plv2-card').forEach(c => c.classList.remove('active'));
-  const card = document.getElementById('plv2-card-' + n);
-  if (card) card.classList.add('active');
-  const counter = document.getElementById('q-counter');
-  if (counter) counter.textContent = 'Question ' + (n+1) + ' / 10';
-  currentQ = n;
+function showPLQ(n){
+  document.querySelectorAll('.pl-card').forEach(c=>c.classList.remove('active'));
+  const card = document.getElementById('pl-card-'+n);
+  if(card) card.classList.add('active');
+  document.getElementById('pl-counter').textContent = 'Question '+(n+1)+' / 10';
+  plCur = n;
 }
+function nextPLQ(){ if(plCur<9) showPLQ(plCur+1); }
+function prevPLQ(){ if(plCur>0) showPLQ(plCur-1); }
 
-function nextQ() { if (currentQ < 9) showQ(currentQ + 1); }
-function prevQ() { if (currentQ > 0) showQ(currentQ - 1); }
+// Build PL cards when slide 25 becomes active
+const origGoToSlide = goToSlide;
+window.goToSlide = function(n){
+  origGoToSlide(n);
+  if(SLIDE_IDS[n]==='slide-25') setTimeout(buildPLCards, 50);
+};
 
-// Build cards when slide-27 becomes active
-const origGoToSlide = window.goToSlide;
+// ── EXIT TICKET CONFETTI ───────────────────────────────────
+function launchConfetti(){
+  const wrap = document.getElementById('et-confetti');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const colors = ['#F1C405','#E91E8C','#00BCD4','#00C853','#FF6B35','#7B2FBE'];
+  for(let i=0;i<60;i++){
+    const c = document.createElement('div');
+    c.style.cssText = `position:absolute;width:8px;height:8px;border-radius:2px;background:${colors[i%colors.length]};left:${Math.random()*100}%;top:-10px;opacity:${0.7+Math.random()*0.3};animation:fall ${1.5+Math.random()*2}s linear ${Math.random()*1.5}s forwards;`;
+    wrap.appendChild(c);
+  }
+}
+// Add confetti animation
+const style = document.createElement('style');
+style.textContent = '@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}';
+document.head.appendChild(style);
 
+// Launch confetti when exit ticket is shown
+const _orig = window.goToSlide;
+window.goToSlide = function(n){
+  _orig(n);
+  if(SLIDE_IDS[n]==='slide-26') setTimeout(launchConfetti, 100);
+};
 </script>
 </body>
 </html>
