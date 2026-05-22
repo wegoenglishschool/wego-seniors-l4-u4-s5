@@ -144,6 +144,22 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--deep);font-fam
 .ls-audio-btn.playing{background:var(--red);}
 .ls-inst{font-size:16px;color:rgba(255,255,255,0.75);font-style:italic;text-align:center;}
 
+
+/* POST-LISTENING v2 */
+.plv2-card{background:rgba(255,255,255,0.05);border:2px solid rgba(255,255,255,0.12);border-radius:18px;padding:22px 28px;display:none;flex-direction:column;gap:14px;}
+.plv2-card.active{display:flex;}
+.plv2-q-num{font-family:'Space Mono',monospace;font-size:11px;color:rgba(0,188,212,0.8);font-weight:700;letter-spacing:1px;}
+.plv2-q-text{font-size:20px;font-weight:700;color:white;line-height:1.4;}
+.plv2-reveal-row{display:flex;gap:12px;flex-wrap:wrap;}
+.plv2-btn{padding:10px 22px;border-radius:10px;border:none;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
+.plv2-btn-answer{background:var(--green);color:#0d0d2b;}
+.plv2-btn-slang{background:var(--purple);color:white;}
+.plv2-btn:disabled{opacity:0.35;cursor:default;}
+.plv2-answer{display:none;background:rgba(0,200,83,0.12);border:1px solid rgba(0,200,83,0.3);border-radius:10px;padding:12px 18px;color:#00C853;font-size:16px;font-weight:600;}
+.plv2-answer.visible{display:block;}
+.plv2-slang{display:none;background:rgba(123,47,190,0.15);border:1px solid rgba(123,47,190,0.4);border-radius:10px;padding:12px 18px;color:#b97ff8;font-size:18px;font-weight:900;font-style:italic;}
+.plv2-slang.visible{display:block;}
+
 /* POST-LISTENING */
 .pl-layout{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0;}
 .pl-questions{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;justify-content:center;}
@@ -429,41 +445,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--deep);font-fam
     <span class="sh-title">Did you catch them all?</span>
     <div class="sh-right"><span class="sh-book">Comprehension</span></div>
   </div>
-  <div class="slide-content">
-    <div class="pl-layout">
-      <div class="pl-hint">Click each question to reveal the answer</div>
-      <div class="pl-questions">
-        <div class="pl-q" onclick="this.classList.toggle('revealed')">
-          <div class="pl-q-num">Q1</div>
-          <div class="pl-q-text">What slang did she use when the trip was extremely fun?</div>
-          <div class="pl-answer">&#10003; "It was a total blast"</div>
-        </div>
-        <div class="pl-q" onclick="this.classList.toggle('revealed')">
-          <div class="pl-q-num">Q2</div>
-          <div class="pl-q-text">Which slang described the overpriced hotel?</div>
-          <div class="pl-answer">&#10003; "It was a rip-off"</div>
-        </div>
-        <div class="pl-q" onclick="this.classList.toggle('revealed')">
-          <div class="pl-q-num">Q3</div>
-          <div class="pl-q-text">What did she say when she was exhausted after the long flight?</div>
-          <div class="pl-answer">&#10003; "I'm beat"</div>
-        </div>
-        <div class="pl-q" onclick="this.classList.toggle('revealed')">
-          <div class="pl-q-num">Q4</div>
-          <div class="pl-q-text">Which slang did she use when she found the perfect beach?</div>
-          <div class="pl-answer">&#10003; "We hit the jackpot"</div>
-        </div>
-        <div class="pl-q" onclick="this.classList.toggle('revealed')">
-          <div class="pl-q-num">Q5</div>
-          <div class="pl-q-text">What expression did she use when she decided to just enjoy the chaos?</div>
-          <div class="pl-answer">&#10003; "Go with the flow"</div>
-        </div>
-      </div>
+  <div class="slide-content" style="padding:10px 20px;gap:8px;">
+    <div style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:4px;">Click REVEAL ANSWER, then REVEAL SLANG for each question</div>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+      <button onclick="prevQ()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;">&#9664; Prev</button>
+      <div style="flex:1;text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,0.5);" id="q-counter">Question 1 / 10</div>
+      <button onclick="nextQ()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;">Next &#9654;</button>
+    </div>
+    <div id="q-cards-container" style="flex:1;position:relative;">
     </div>
   </div>
 </div>
 
-<!-- ===== SLIDE 28: EXIT TICKET ===== -->
 <div class="slide" id="slide-28">
   <div class="section-header">
     <span class="sh-badge" style="background:#FF3B3B;color:white;">EXIT TICKET</span>
@@ -665,6 +658,7 @@ function buildNav(){
 }
 
 function goToSlide(n){
+  if(n===27){setTimeout(buildQCards,50);}
   slides[currentSlide].classList.remove('active');
   currentSlide = Math.max(0, Math.min(n, slides.length-1));
   slides[currentSlide].classList.add('active');
@@ -707,6 +701,70 @@ document.addEventListener('keydown', e => {
   slides[0].classList.add('active');
   updateNavbar();
 })();
+
+// ===== POST-LISTENING v2 =====
+const PL_QUESTIONS = [
+  {q:"How was Maya's trip overall? Did she enjoy it?", a:"She had an amazing time — she loved every moment of it.", s:'"It was a total blast!"'},
+  {q:"How did her trip start? What happened at the beginning?", a:"She started her journey but her flight was delayed 4 hours.", s:'"Hit the road"'},
+  {q:"How did she feel about the 4-hour delay?", a:"She didn't like it at all — it was frustrating for her.", s:'"I'm not a big fan of that"'},
+  {q:"Was the hotel a good deal? What did she think about the price?", a:"No — she paid $400 for a terrible room with no hot water.", s:'"It was a rip-off"'},
+  {q:"How did Maya feel when she finally got to the beach?", a:"She was completely exhausted — she could barely walk.", s:'"I'm beat"'},
+  {q:"What happened when she found the hidden cove?", a:"She found a perfect, empty beach with crystal blue water — a wonderful surprise.", s:'"We hit the jackpot"'},
+  {q:"Does Maya usually enjoy street food?", a:"No — it's not something she normally likes or chooses.", s:'"It's not my cup of tea"'},
+  {q:"What did her friend suggest she do about the food?", a:"Her friend told her to relax and just enjoy whatever comes.", s:'"Go with the flow"'},
+  {q:"After trying the tacos, was it an easy decision to always try local food?", a:"Yes — she said it's an obvious choice now, no doubt about it.", s:'"It's a no-brainer"'},
+  {q:"After all the chaos — does she regret the trip?", a:"No — she says every difficult moment was completely worth it.", s:'"It was so worth it"'}
+];
+let currentQ = 0;
+
+function buildQCards() {
+  const container = document.getElementById('q-cards-container');
+  if (!container) return;
+  container.innerHTML = '';
+  PL_QUESTIONS.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'plv2-card' + (i === 0 ? ' active' : '');
+    card.id = 'plv2-card-' + i;
+    card.innerHTML = `
+      <div class="plv2-q-num">QUESTION ${i+1} OF 10</div>
+      <div class="plv2-q-text">${item.q}</div>
+      <div class="plv2-reveal-row">
+        <button class="plv2-btn plv2-btn-answer" id="btn-ans-${i}" onclick="revealAnswer(${i})">&#10003; REVEAL ANSWER</button>
+        <button class="plv2-btn plv2-btn-slang" id="btn-slang-${i}" onclick="revealSlang(${i})" disabled>&#128172; REVEAL SLANG</button>
+      </div>
+      <div class="plv2-answer" id="ans-${i}">&#10003; ${item.a}</div>
+      <div class="plv2-slang" id="slang-${i}">&#128172; ${item.s}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function revealAnswer(i) {
+  document.getElementById('ans-' + i).classList.add('visible');
+  document.getElementById('btn-ans-' + i).disabled = true;
+  document.getElementById('btn-slang-' + i).disabled = false;
+}
+
+function revealSlang(i) {
+  document.getElementById('slang-' + i).classList.add('visible');
+  document.getElementById('btn-slang-' + i).disabled = true;
+}
+
+function showQ(n) {
+  document.querySelectorAll('.plv2-card').forEach(c => c.classList.remove('active'));
+  const card = document.getElementById('plv2-card-' + n);
+  if (card) card.classList.add('active');
+  const counter = document.getElementById('q-counter');
+  if (counter) counter.textContent = 'Question ' + (n+1) + ' / 10';
+  currentQ = n;
+}
+
+function nextQ() { if (currentQ < 9) showQ(currentQ + 1); }
+function prevQ() { if (currentQ > 0) showQ(currentQ - 1); }
+
+// Build cards when slide-27 becomes active
+const origGoToSlide = window.goToSlide;
+
 </script>
 </body>
 </html>
